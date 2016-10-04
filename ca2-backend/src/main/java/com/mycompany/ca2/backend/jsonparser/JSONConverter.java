@@ -17,7 +17,7 @@ public class JSONConverter {
 
     private static final Gson gson = new Gson();
 
-    public static Object getPersonFromJson(String js, Class<?> type) {
+    public static Object getObjectFromJson(String js, Class<?> type) {
         return gson.fromJson(js, type);
     }
 

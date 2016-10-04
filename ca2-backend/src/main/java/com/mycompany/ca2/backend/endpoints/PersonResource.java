@@ -15,6 +15,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -23,6 +25,9 @@ import javax.ws.rs.PathParam;
 @Path("/person")
 public class PersonResource {
 
+    @Context
+    private UriInfo context;
+    
     Facade facade;
     /**
      * Gets all persons from database with all data attached
@@ -89,7 +94,7 @@ public class PersonResource {
      */
     @POST
     public void createPerson(String person) {
-        facade.addInfoEntity((Person) JSONConverter.getPersonFromJson(person, Person.class));
+        facade.addInfoEntity((Person) JSONConverter.getObjectFromJson(person, Person.class));
     }
 
     /**
@@ -100,7 +105,7 @@ public class PersonResource {
      */
     @PUT
     public InfoEntity editPerson(String person) {
-        return facade.editInfoEntity((Person)JSONConverter.getPersonFromJson(person, Person.class));
+        return facade.editInfoEntity((Person)JSONConverter.getObjectFromJson(person, Person.class));
     }
 
     /**

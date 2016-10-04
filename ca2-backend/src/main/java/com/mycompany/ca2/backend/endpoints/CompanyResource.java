@@ -14,7 +14,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import static javax.ws.rs.client.Entity.entity;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -23,6 +24,9 @@ import static javax.ws.rs.client.Entity.entity;
 
 @Path("/company")
 public class CompanyResource {
+    
+    @Context
+    private UriInfo context;
     
     Facade facade;
     
@@ -41,24 +45,24 @@ public class CompanyResource {
     @GET
     @Path("/contactinfo")
     public String getInfoCompanies() {
-        return JSONConverter.getJSONFromObject(facade.getCompanyInfo());
+        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfo());
     }
     
     @GET
     @Path("/contactinfo/{id}")
     public String getInfoCompanies(@PathParam("id") int id) {
-        return JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
     }
     
     @POST
     public void createCompany(String com){
-        Company company = (Company) JSONConverter.getPersonFromJson(com, Company.class);
+        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
         facade.addInfoEntity(company);
     }
     
     @PUT
     public String editCompany(String com){
-        Company company = (Company) JSONConverter.getPersonFromJson(com, Company.class);
+        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
         return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
     }
     
