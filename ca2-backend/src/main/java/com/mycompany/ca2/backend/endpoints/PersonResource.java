@@ -5,6 +5,7 @@
  */
 package com.mycompany.ca2.backend.endpoints;
 
+import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
@@ -54,7 +55,7 @@ public class PersonResource {
     @GET
     @Path("/contactinfo")
     public String getInfoPersons() {
-        return null;//MakeJsonFromFacadeStuff...
+        return null; // JSONConverter.getJSONFromObject(facade.getPersonsInfo());
     }
 
     /**
@@ -65,8 +66,8 @@ public class PersonResource {
      */
     @GET
     @Path("/contatinfo/{id}")
-    public String getInfoById(@PathParam("id") String id) {
-        return null;//MakeJsonFromFacadeStuff...
+    public String getInfoById(@PathParam("id") int id) {
+        return null; // JSONConverter.getJSONFromObject(facade.getPersonInfo(id));
     }
 
     /**
@@ -75,9 +76,9 @@ public class PersonResource {
      * @return 
      */
     @GET
-    @Path("hobby/{id}")
-    public String getHobbyById(@PathParam("id") String id){
-        return null; //facadeGetHobbyById
+    @Path("hobby/{hobby}")
+    public String getPersonsByHoppy(@PathParam("hoppy") String hobby){
+        return null; //JSONConverter.getJSONFromObject(facade.getPersonsByHobby(hobby));
     }
 
     
@@ -87,8 +88,8 @@ public class PersonResource {
      * @param p
      */
     @POST
-    public void createPerson(Person p) {
-        //facadeStuffWithP...
+    public void createPerson(String person) {
+        facade.addInfoEntity((Person) JSONConverter.getPersonFromJson(person, Person.class));
     }
 
     /**
@@ -98,8 +99,8 @@ public class PersonResource {
      * @return
      */
     @PUT
-    public String editPerson(Person p) {
-        return null; //facadeEditP
+    public InfoEntity editPerson(String person) {
+        return facade.editInfoEntity((Person)JSONConverter.getPersonFromJson(person, Person.class));
     }
 
     /**
@@ -109,8 +110,8 @@ public class PersonResource {
      */
     @DELETE
     @Path("/{id}")
-    public void deletePersonByID(@PathParam("id") String id) {
-        //facadeDeletePById
+    public void deletePersonByID(@PathParam("id") int id) {
+        facade.deleteInfoEntity(id);
     }
 
 }
