@@ -41,13 +41,15 @@ public class CompanyResource {
     @GET
     @Path("/contactinfo")
     public String getInfoCompanies() {
-        return JSONConverter.getJSONFromObject(facade.getCompanyInfo());
+        //return JSONConverter.getJSONFromObject(facade.getCompanyInfo());
+        return null;
     }
     
     @GET
     @Path("/contactinfo/{id}")
     public String getInfoCompanies(@PathParam("id") int id) {
-        return JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+        //return JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+        return null;
     }
     
     @POST
