@@ -94,7 +94,7 @@ public interface Facade {
      * @param personId
      * @return 
      */
-    Hobby addHobbyToPerson(int personId, Hobby hobby);
+    Person addHobbyToPerson(int personId, Hobby hobby);
     
     /**
      * Adds a new Phone object to the InfoEntity with the given Id

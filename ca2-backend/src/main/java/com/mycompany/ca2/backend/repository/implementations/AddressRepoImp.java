@@ -5,9 +5,13 @@
  */
 package com.mycompany.ca2.backend.repository.implementations;
 
+import com.mycompany.ca2.backend.EmfService;
 import com.mycompany.ca2.backend.entities.CityInfo;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.AddressRepo;
+import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -17,7 +21,13 @@ public class AddressRepoImp implements AddressRepo{
 
     @Override
     public List<CityInfo> getCities() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<CityInfo> query = em.createQuery("SELECT city FROM cityInfo city", CityInfo.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
     
 }

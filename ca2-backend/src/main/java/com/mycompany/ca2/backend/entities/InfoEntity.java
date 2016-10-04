@@ -5,30 +5,39 @@
  */
 package com.mycompany.ca2.backend.entities;
 
-import static com.oracle.jrockit.jfr.ContentType.Address;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 /**
  *
  * @author Orvur
  */
+
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    @OneToMany(mappedBy = "infoEntity")
-    private Address address;
+    
+    
     @ManyToOne
+    private Address address;
+    
+    
+    @OneToMany(mappedBy = "infoEntity")
     private List<Phone> phones;
 
     public void setAdress(Address address){
