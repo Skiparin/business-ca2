@@ -6,6 +6,8 @@
 package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.Company;
+import com.mycompany.ca2.backend.facade.interfaces.Facade;
+import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,44 +24,48 @@ import static javax.ws.rs.client.Entity.entity;
 @Path("/company")
 public class CompanyResource {
     
+    Facade facade;
+    
     @GET
     @Path("/complete")
     public String getAllCompanies() {
-        return null;//MakeJsonFromFacadeStuff...
+        return JSONConverter.getJSONFromObject(facade.getCompanies());
     }
     
     @GET
     @Path("/complete/{id}")
-    public String getCompanyById(@PathParam("id") String id) {
-        return null;//MakeJsonFromFacadeStuff...
+    public String getCompanyById(@PathParam("id") int id) {
+        return JSONConverter.getJSONFromObject(facade.getCompany(id));
     }
     
     @GET
     @Path("/contactinfo")
     public String getInfoCompanies() {
-        return null;//MakeJsonFromFacadeStuff...
+        return JSONConverter.getJSONFromObject(facade.getCompanyInfo());
     }
     
     @GET
     @Path("/contactinfo/{id}")
-    public String getAllPersons(@PathParam("id") String id) {
-        return null;//MakeJsonFromFacadeStuff...
+    public String getInfoCompanies(@PathParam("id") int id) {
+        return JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
     }
     
     @POST
-    public void createCompany(Company com){
-        //facadeCreateCom
+    public void createCompany(String com){
+        Company company = (Company) JSONConverter.getPersonFromJson(com, Company.class);
+        facade.addInfoEntity(company);
     }
     
     @PUT
-    public String editCompany(Company com){
-        return null; //facadeEditCom
+    public String editCompany(String com){
+        Company company = (Company) JSONConverter.getPersonFromJson(com, Company.class);
+        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
     }
     
     @DELETE
     @Path("/{id}")
-    public void deleteCompanyById(@PathParam("id") String id){
-        //facadeDeleteComById
+    public void deleteCompanyById(@PathParam("id") int id){
+        facade.deleteInfoEntity(id);
     }
     
     
