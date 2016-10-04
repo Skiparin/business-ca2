@@ -37,7 +37,10 @@ public class PersonResource {
     @GET
     @Path("/complete")
     public String getAllPersons() {
-        return JSONConverter.getJSONFromObject(facade.getPersons());
+        Person p = new Person();
+        p.setFirstName("Kasper");
+        System.out.println(JSONConverter.getJSONFromObject(p));
+        return  JSONConverter.getJSONFromObject(p);//JSONConverter.getJSONFromObject(facade.getPersons());
     }
 
     /**
