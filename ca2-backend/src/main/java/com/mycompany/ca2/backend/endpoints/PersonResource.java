@@ -5,7 +5,9 @@
  */
 package com.mycompany.ca2.backend.endpoints;
 
-import entity.Person;
+import com.mycompany.ca2.backend.entities.Person;
+import com.mycompany.ca2.backend.facade.interfaces.Facade;
+import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,6 +22,7 @@ import javax.ws.rs.PathParam;
 @Path("/person")
 public class PersonResource {
 
+    Facade facade;
     /**
      * Gets all persons from database with all data attached
      *
@@ -28,7 +31,7 @@ public class PersonResource {
     @GET
     @Path("/complete")
     public String getAllPersons() {
-        return null;//MakeJsonFromFacadeStuff...
+        return JSONConverter.getJSONFromObject(facade.getPersons());
     }
 
     /**
@@ -39,8 +42,8 @@ public class PersonResource {
      */
     @GET
     @Path("/complete/{id}")
-    public String getPersonById(@PathParam("id") String id) {
-        return null;//MakeJsonFromFacadeStuff...With id....
+    public String getPersonById(@PathParam("id") int id) {
+        return JSONConverter.getJSONFromObject(facade.getPerson(id)); // toJson
     }
 
     /**
