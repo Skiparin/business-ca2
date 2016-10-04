@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author Orvur
  */
 @Entity
-public class Company extends infoEntity {
+public class Company extends InfoEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

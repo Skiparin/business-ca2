@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
  * @author Orvur
  */
 @Entity
-public class Person extends infoEntity {
+public class Person extends InfoEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

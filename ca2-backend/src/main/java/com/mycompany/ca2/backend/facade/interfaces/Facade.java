@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ca2.backend.facadeInterfaces;
+package com.mycompany.ca2.backend.facade.interfaces;
 
+import com.mycompany.ca2.backend.entities.*;
 import java.util.List;
 
 /**
@@ -116,5 +117,10 @@ public interface Facade {
      * @return 
      */
     InfoEntity editInfoEntity(InfoEntity entity);
+    
+    
+    InfoEntity deleteInfoEntity(int entityId);
+    
+    Phone deletePhone(int phoneNumber);
     
 }

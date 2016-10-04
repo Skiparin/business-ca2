@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ca2.backend.facadeInterfaces;
+package com.mycompany.ca2.backend.repository.interfaces;
 
+import com.mycompany.ca2.backend.entities.CityInfo;
 import java.util.List;
 
 /**
  *
  * @author Mikkel
  */
-public interface AddressFacade {
-    List<City> getCities();
+public interface AddressRepo {
+    List<CityInfo> getCities();
 }

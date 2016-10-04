@@ -8,7 +8,7 @@
     <class>com.mycompany.ca2.backend.entities.Hobby</class>
     <class>com.mycompany.ca2.backend.entities.Person</class>
     <class>com.mycompany.ca2.backend.entities.Phone</class>
-    <class>com.mycompany.ca2.backend.entities.infoEntity</class>
+    <class>com.mycompany.ca2.backend.entities.InfoEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

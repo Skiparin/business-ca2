@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ca2.backend.facadeInterfaces;
+package com.mycompany.ca2.backend.repository.interfaces;
 
+import com.mycompany.ca2.backend.entities.*;
 import java.util.List;
 
 /**
  *
  * @author Mikkel
  */
-public interface InfoEntityFacade {
+public interface InfoEntityRepo {
     /**
      * Adds a company or a person
      * @param entity
@@ -19,6 +20,8 @@ public interface InfoEntityFacade {
      **/
     InfoEntity addInfoEntity(InfoEntity entity);
 
+    
+    Hobby addHobbyToPerson(int personId, Hobby hobby);
     /**
      * Edits an InfoEntity - Can be a person or a company
      * @param entity
@@ -86,5 +89,8 @@ public interface InfoEntityFacade {
      * @return
      */
     Company getCompanyByPhone(int phoneNumber);
+    
+    
+    InfoEntity deleteInfoEntity(int entityId);
 
 }

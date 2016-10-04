@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ca2.backend.facadeImplementations;
+package com.mycompany.ca2.backend.facade.implementations;
 
-import com.mycompany.ca2.backend.facadeInterfaces.AddressFacade;
-import com.mycompany.ca2.backend.facadeInterfaces.Facade;
-import com.mycompany.ca2.backend.facadeInterfaces.InfoEntityFacade;
-import com.mycompany.ca2.backend.facadeInterfaces.PhoneFacade;
+import com.mycompany.ca2.backend.entities.*;
+import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import java.util.List;
+import com.mycompany.ca2.backend.repository.interfaces.AddressRepo;
+import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
+import com.mycompany.ca2.backend.repository.interfaces.PhoneRepo;
 
 /**
  *
@@ -17,11 +18,11 @@ import java.util.List;
  */
 public class FacadeImp implements Facade{
 
-    private final InfoEntityFacade infoEntityFacade;
-    private final PhoneFacade phoneFacade;
-    private final AddressFacade addressFacade;
+    private final InfoEntityRepo infoEntityFacade;
+    private final PhoneRepo phoneFacade;
+    private final AddressRepo addressFacade;
     
-    public FacadeImp (InfoEntityFacade entityFacade, PhoneFacade phoneFacade, AddressFacade addressFacade){
+    public FacadeImp (InfoEntityRepo entityFacade, PhoneRepo phoneFacade, AddressRepo addressFacade){
         this.infoEntityFacade = entityFacade;
         this.phoneFacade = phoneFacade;
         this.addressFacade = addressFacade;
@@ -100,6 +101,16 @@ public class FacadeImp implements Facade{
     @Override
     public InfoEntity editInfoEntity(InfoEntity entity) {
         return this.infoEntityFacade.editInfoEntity(entity);
+    }
+
+    @Override
+    public InfoEntity deleteInfoEntity(int entityId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Phone deletePhone(int phoneNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

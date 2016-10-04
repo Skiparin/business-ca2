@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.ca2.backend.facadeInterfaces;
+package com.mycompany.ca2.backend.repository.interfaces;
+
+import com.mycompany.ca2.backend.entities.Phone;
 
 /**
  *
  * @author Mikkel
  */
-public interface PhoneFacade {
+public interface PhoneRepo {
     /**
      * Adds a new Phone object to the InfoEntity with the given Id
      * @param entityId
@@ -24,5 +26,13 @@ public interface PhoneFacade {
      * @return 
      */
     Phone editPhone(Phone phone);
+    
+    
+    /**
+     * Deletes a phone
+     * @param phoneNumber
+     * @return 
+     */
+    Phone deletePhone(int phoneNumber);
     
 }
