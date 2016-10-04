@@ -21,10 +21,12 @@ import javax.persistence.ManyToMany;
 public class Person extends InfoEntity {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
+    
+    
     @ManyToMany
     private List<Hobby> hobbies;
 

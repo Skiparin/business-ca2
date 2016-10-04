@@ -12,24 +12,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Orvur
  */
+
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     
     
     @ManyToOne
     private Address address;
-    @ManyToOne
+    
+    
+    @OneToMany(mappedBy = "infoEntity")
     private List<Phone> phones;
 
     public void setAdress(Address address){

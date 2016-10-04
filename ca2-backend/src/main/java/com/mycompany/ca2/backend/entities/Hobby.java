@@ -19,18 +19,16 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class Hobby implements Serializable {
+
+    @ManyToMany(mappedBy = "hobbies")
+    private List<Person> persons;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-    @ManyToMany
-    private List<Person> persons;
 
-    public void addPerson(Person person){
-        persons.add(person);
-    }
     
     public String getName() {
         return name;
@@ -48,13 +46,6 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
     
 
     
