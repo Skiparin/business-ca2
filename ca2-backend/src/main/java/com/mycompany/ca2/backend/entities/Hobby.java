@@ -3,30 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Orvur
  */
 @Entity
-public class Company extends infoEntity {
+public class Hobby implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
-    private String cvr;
-    private String NumEmployees;
-    private String marketValue;
+    @ManyToMany
+    private List<Person> persons;
 
+    public void addPerson(Person person){
+        persons.add(person);
+    }
+    
     public String getName() {
         return name;
     }
@@ -43,28 +48,12 @@ public class Company extends infoEntity {
         this.description = description;
     }
 
-    public String getCvr() {
-        return cvr;
+    public List<Person> getPersons() {
+        return persons;
     }
 
-    public void setCvr(String cvr) {
-        this.cvr = cvr;
-    }
-
-    public String getNumEmployees() {
-        return NumEmployees;
-    }
-
-    public void setNumEmployees(String NumEmployees) {
-        this.NumEmployees = NumEmployees;
-    }
-
-    public String getMarketValue() {
-        return marketValue;
-    }
-
-    public void setMarketValue(String marketValue) {
-        this.marketValue = marketValue;
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
     
 
@@ -88,10 +77,10 @@ public class Company extends infoEntity {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Company)) {
+        if (!(object instanceof Hobby)) {
             return false;
         }
-        Company other = (Company) object;
+        Hobby other = (Hobby) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -100,7 +89,7 @@ public class Company extends infoEntity {
 
     @Override
     public String toString() {
-        return "entity.Company[ id=" + id + " ]";
+        return "entity.Hobby[ id=" + id + " ]";
     }
     
 }

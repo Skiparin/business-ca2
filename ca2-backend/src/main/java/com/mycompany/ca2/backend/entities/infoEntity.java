@@ -3,56 +3,66 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
+import static com.oracle.jrockit.jfr.ContentType.Address;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Orvur
  */
 @Entity
-public class Person extends infoEntity {
+public class infoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
-    @ManyToMany
-    private List<Hobby> Hobbies;
+    private String email;
+    @OneToMany(mappedBy = "infoEntity")
+    private Address address;
+    @ManyToOne
+    private List<Phone> phones;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public List<Hobby> getHobbies() {
-        return Hobbies;
-    }
-
-    public void setHobbies(List<Hobby> Hobbies) {
-        this.Hobbies = Hobbies;
+    public void setAdress(Address address){
+        this.address = address;
     }
     
+    public void setPhones(List<Phone> phones){
+        this.phones = phones;
+    }
+    
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
@@ -71,10 +81,10 @@ public class Person extends infoEntity {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
+        if (!(object instanceof infoEntity)) {
             return false;
         }
-        Person other = (Person) object;
+        infoEntity other = (infoEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -83,7 +93,7 @@ public class Person extends infoEntity {
 
     @Override
     public String toString() {
-        return "entity.NewEntity[ id=" + id + " ]";
+        return "entity.infoEntity[ id=" + id + " ]";
     }
     
 }

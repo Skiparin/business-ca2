@@ -3,72 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
-import static com.oracle.jrockit.jfr.ContentType.Address;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
- * @author Orvur
+ * @author philliphbrink
  */
 @Entity
-public class infoEntity implements Serializable {
+public class Address implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String email;
-    @OneToMany(mappedBy = "infoEntity")
-    private Address address;
+    private String street;
+    private String additionalInfo;
+    
     @ManyToOne
-    private List<Phone> phones;
-
-    public void setAdress(Address address){
-        this.address = address;
-    }
+    private CityInfo cityInfo;
     
-    public void setPhones(List<Phone> phones){
-        this.phones = phones;
-    }
-    
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public List<Phone> getPhones() {
-        return phones;
-    }
-
-    
-    
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    
-    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
     }
 
     @Override
@@ -81,10 +72,10 @@ public class infoEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof infoEntity)) {
+        if (!(object instanceof Address)) {
             return false;
         }
-        infoEntity other = (infoEntity) object;
+        Address other = (Address) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +84,7 @@ public class infoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.infoEntity[ id=" + id + " ]";
+        return "entity.Address[ id=" + id + " ]";
     }
     
 }

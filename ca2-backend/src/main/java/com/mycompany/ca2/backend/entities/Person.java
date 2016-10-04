@@ -3,27 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
- * @author philliphbrink
+ * @author Orvur
  */
 @Entity
-public class Phone implements Serializable {
-
+public class Person extends infoEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int number;
-    private String description;
+    private String firstName;
+    private String lastName;
+    @ManyToMany
+    private List<Hobby> Hobbies;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<Hobby> getHobbies() {
+        return Hobbies;
+    }
+
+    public void setHobbies(List<Hobby> Hobbies) {
+        this.Hobbies = Hobbies;
+    }
+    
 
     public Long getId() {
         return id;
@@ -31,22 +59,6 @@ public class Phone implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
@@ -59,10 +71,10 @@ public class Phone implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Phone)) {
+        if (!(object instanceof Person)) {
             return false;
         }
-        Phone other = (Phone) object;
+        Person other = (Person) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -71,7 +83,7 @@ public class Phone implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Phone[ id=" + id + " ]";
+        return "entity.NewEntity[ id=" + id + " ]";
     }
     
 }

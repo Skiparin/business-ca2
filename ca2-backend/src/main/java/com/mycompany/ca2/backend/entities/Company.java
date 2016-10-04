@@ -3,35 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Orvur
  */
 @Entity
-public class Hobby implements Serializable {
+public class Company extends infoEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;
-    @ManyToMany
-    private List<Person> persons;
+    private String cvr;
+    private String NumEmployees;
+    private String marketValue;
 
-    public void addPerson(Person person){
-        persons.add(person);
-    }
-    
     public String getName() {
         return name;
     }
@@ -48,12 +43,28 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public String getCvr() {
+        return cvr;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
+    public void setCvr(String cvr) {
+        this.cvr = cvr;
+    }
+
+    public String getNumEmployees() {
+        return NumEmployees;
+    }
+
+    public void setNumEmployees(String NumEmployees) {
+        this.NumEmployees = NumEmployees;
+    }
+
+    public String getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(String marketValue) {
+        this.marketValue = marketValue;
     }
     
 
@@ -77,10 +88,10 @@ public class Hobby implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Hobby)) {
+        if (!(object instanceof Company)) {
             return false;
         }
-        Hobby other = (Hobby) object;
+        Company other = (Company) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +100,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Hobby[ id=" + id + " ]";
+        return "entity.Company[ id=" + id + " ]";
     }
     
 }

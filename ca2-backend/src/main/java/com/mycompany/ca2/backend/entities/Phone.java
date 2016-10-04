@@ -3,32 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author philliphbrink
  */
 @Entity
-public class Address implements Serializable {
+public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String street;
-    private String additionalInfo;
-    
-    @ManyToOne
-    private CityInfo cityInfo;
-    
+    private int number;
+    private String description;
 
     public Long getId() {
         return id;
@@ -38,28 +33,20 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public String getStreet() {
-        return street;
+    public int getNumber() {
+        return number;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public String getAdditionalInfo() {
-        return additionalInfo;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
-    public CityInfo getCityInfo() {
-        return cityInfo;
-    }
-
-    public void setCityInfo(CityInfo cityInfo) {
-        this.cityInfo = cityInfo;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -72,10 +59,10 @@ public class Address implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Address)) {
+        if (!(object instanceof Phone)) {
             return false;
         }
-        Address other = (Address) object;
+        Phone other = (Phone) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,7 +71,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Address[ id=" + id + " ]";
+        return "entity.Phone[ id=" + id + " ]";
     }
     
 }
