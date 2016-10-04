@@ -7,7 +7,6 @@ package com.mycompany.ca2.backend.facadeImplementations;
 
 import com.mycompany.ca2.backend.facadeInterfaces.AddressFacade;
 import com.mycompany.ca2.backend.facadeInterfaces.Facade;
-import com.mycompany.ca2.backend.facadeInterfaces.HobbyFacade;
 import com.mycompany.ca2.backend.facadeInterfaces.InfoEntityFacade;
 import com.mycompany.ca2.backend.facadeInterfaces.PhoneFacade;
 import java.util.List;
@@ -18,13 +17,14 @@ import java.util.List;
  */
 public class FacadeImp implements Facade{
 
-    private InfoEntityFacade infoEntityFacade;
-    private PhoneFacade phoneFacade;
-    private AddressFacade addressFacade;
+    private final InfoEntityFacade infoEntityFacade;
+    private final PhoneFacade phoneFacade;
+    private final AddressFacade addressFacade;
     
-    public FacadeImp (InfoEntityFacade entityFacade, PhoneFacade phoneFacade){
+    public FacadeImp (InfoEntityFacade entityFacade, PhoneFacade phoneFacade, AddressFacade addressFacade){
         this.infoEntityFacade = entityFacade;
         this.phoneFacade = phoneFacade;
+        this.addressFacade = addressFacade;
     }
     
     @Override
