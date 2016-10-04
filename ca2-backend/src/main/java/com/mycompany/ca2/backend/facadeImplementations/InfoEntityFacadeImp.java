@@ -16,8 +16,6 @@ import java.util.List;
  */
 public class InfoEntityFacadeImp implements InfoEntityFacade{
     
-    private PersonFacade personFacade;
-    private CompanyFacade companyFacade;
     
     public InfoEntityFacadeImp(PersonFacade personFacade, CompanyFacade companyFacade){
         this.personFacade = personFacade;
@@ -26,47 +24,47 @@ public class InfoEntityFacadeImp implements InfoEntityFacade{
 
     @Override
     public Person getPerson(int id) {
-        return this.personFacade.getPerson(id);
+        return null;
     }
 
     @Override
     public Person getPersonByPhone(int phoneNumber) {
-        return this.personFacade.getPersonByPhone(phoneNumber);
+        return tnull;
     }
 
     @Override
     public List<Person> getPersons() {
-        return this.personFacade.getPersons();
+        return null;
     }
 
     @Override
     public List<Person> getPersonsByZip(int zipCode) {
-        return this.personFacade.getPersonsByZip(zipCode);
+        return null;
     }
 
     @Override
     public List<Person> getPersonsByHobby(Hobby hobby) {
-        return this.personFacade.getPersonsByHobby(hobby);
+        return null;
     }
 
     @Override
     public List<Company> getCompanies() {
-        return this.companyFacade.getCompanies();
+        return null;
     }
 
     @Override
     public List<Company> getCompaniesMinEmployees(int minEmployees) {
-        return this.companyFacade.getCompaniesMinEmployees(minEmployees);
+        return null;
     }
 
     @Override
     public Company getCompany(int cvr) {
-        return this.companyFacade.getCompany(cvr);
+        return null;
     }
 
     @Override
     public Company getCompanyByPhone(int phoneNumber) {
-        return this.companyFacade.getCompanyByPhone(phoneNumber);
+        return null;
     }
 
     @Override
