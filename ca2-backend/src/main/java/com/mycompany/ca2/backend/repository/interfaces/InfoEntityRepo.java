@@ -21,7 +21,7 @@ public interface InfoEntityRepo {
     InfoEntity addInfoEntity(InfoEntity entity);
 
     
-    Hobby addHobbyToPerson(int personId, Hobby hobby);
+    Person addHobbyToPerson(int personId, Hobby hobby);
     /**
      * Edits an InfoEntity - Can be a person or a company
      * @param entity

@@ -5,12 +5,14 @@
  */
 package com.mycompany.ca2.backend.repository.implementations;
 
+import com.mycompany.ca2.backend.EmfService;
 import com.mycompany.ca2.backend.entities.Company;
 import com.mycompany.ca2.backend.entities.Hobby;
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -20,12 +22,30 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public InfoEntity addInfoEntity(InfoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return entity;
     }
 
     @Override
-    public Hobby addHobbyToPerson(int personId, Hobby hobby) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Person addHobbyToPerson(int personId, Hobby hobby) {
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        Person newPerson;
+        try {
+            Person person = em.find(Person.class, personId);
+            person.addHobby(hobby);
+            newPerson = em.merge(person);
+        } finally {
+            em.close();
+        }
+        return newPerson;
     }
 
     @Override

@@ -105,12 +105,12 @@ public class FacadeImp implements Facade{
 
     @Override
     public InfoEntity deleteInfoEntity(int entityId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.infoEntityFacade.deleteInfoEntity(entityId);
     }
 
     @Override
     public Phone deletePhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.phoneFacade.deletePhone(phoneNumber);
     }
     
 }

@@ -26,7 +26,7 @@ public class Person extends InfoEntity {
     private String firstName;
     private String lastName;
     @ManyToMany
-    private List<Hobby> Hobbies;
+    private List<Hobby> hobbies;
 
     public String getFirstName() {
         return firstName;
@@ -45,11 +45,11 @@ public class Person extends InfoEntity {
     }
 
     public List<Hobby> getHobbies() {
-        return Hobbies;
+        return hobbies;
     }
 
     public void setHobbies(List<Hobby> Hobbies) {
-        this.Hobbies = Hobbies;
+        this.hobbies = Hobbies;
     }
     
 
@@ -59,6 +59,10 @@ public class Person extends InfoEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void addHobby(Hobby hobby){
+        this.hobbies.add(hobby);
     }
 
     @Override
