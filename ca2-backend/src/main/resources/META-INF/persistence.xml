@@ -2,11 +2,13 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.mycompany.ca2.backend_api_war_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <class>entity.Person</class>
-    <class>entity.infoEntity</class>
-    <class>entity.Company</class>
-    <class>entity.Hobby</class>
+    <class>com.mycompany.ca2.backend.entities.Address</class>
+    <class>com.mycompany.ca2.backend.entities.CityInfo</class>
+    <class>com.mycompany.ca2.backend.entities.Company</class>
+    <class>com.mycompany.ca2.backend.entities.Hobby</class>
+    <class>com.mycompany.ca2.backend.entities.Person</class>
+    <class>com.mycompany.ca2.backend.entities.Phone</class>
+    <class>com.mycompany.ca2.backend.entities.infoEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
