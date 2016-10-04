@@ -55,7 +55,14 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public Person getPerson(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        Person person;
+        try {
+            person = em.find(Person.class, id);
+        } finally {
+            em.close();
+        }
+        return person;
     }
 
     @Override
