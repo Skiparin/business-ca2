@@ -13,6 +13,7 @@ import com.mycompany.ca2.backend.entities.Person;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -72,7 +73,13 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public List<Person> getPersons() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Person> persons = em.createQuery("SELECT p FROM Person p", Person.class);
+            return persons.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
