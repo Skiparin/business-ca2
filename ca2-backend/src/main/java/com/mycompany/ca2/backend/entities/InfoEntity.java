@@ -8,6 +8,7 @@ package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 /**
@@ -33,11 +33,11 @@ public class InfoEntity implements Serializable {
     private String email;
     
     
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.PERSIST})
     private Address address;
     
     
-    @OneToMany(mappedBy = "infoEntity")
+    @OneToMany(mappedBy = "infoEntity", cascade={CascadeType.PERSIST})
     private List<Phone> phones;
 
     public void setAdress(Address address){
