@@ -8,7 +8,6 @@ package com.mycompany.ca2.backend.endpoints;
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
-import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
@@ -35,7 +34,7 @@ public class PersonResource {
     @Context
     private UriInfo context;
     
-    FacadeImp facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());;
+    FacadeImp facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
     /**
      * Gets all persons from database with all data attached
      *
@@ -46,6 +45,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllPersons() {
         return  JSONConverter.getJSONFromObject(facade.getPersons());
+
     }
 
     /**
@@ -70,7 +70,7 @@ public class PersonResource {
     @Path("/contactinfo")
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoPersons() {
-        return null; // JSONConverter.getJSONFromObject(facade.getPersonsInfo());
+        return null; //JSONConverter.getJSONFromObject(facade.getPersonsInfo());
     }
 
     /**

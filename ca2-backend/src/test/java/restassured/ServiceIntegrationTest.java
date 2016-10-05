@@ -84,6 +84,7 @@ public class ServiceIntegrationTest {
         then().statusCode(200).
         body("id", equalTo(3));
     }
+
 //    
 //    @Test
 //    public void getInfoPersons() {
@@ -186,6 +187,4 @@ public class ServiceIntegrationTest {
 //    
 //    
 //    
-    
-    
 }

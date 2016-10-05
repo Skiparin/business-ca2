@@ -26,280 +26,280 @@ import org.junit.BeforeClass;
  * @author philliphbrink
  */
 public class FacadeImpTest {
-    static FacadeImp facade;
-    public FacadeImpTest() {
-    }
-    
-    @BeforeClass
-    public static void init(){
-        facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
-        Person entity = new Person();
-        entity.setFirstName("Mikkel");
-        entity.setLastName("Zimmer");
-        entity.setEmail("Vettter@Ørvur.Mikkel");
-        
-//        Hobby hobby = new Hobby();
-//        hobby.setDescription("Hululu");
-//        hobby.setName("Krav Maga");
-//        entity.addHobby(hobby);
-//        
-//        ArrayList<Phone> phones = new ArrayList<Phone>();
-//        Phone phone = new Phone();
-//        phone.setNumber(22334455);
-//        phones.add(phone);
-//        entity.setPhones(phones);
-//        
-//        Address address = new Address();
-//        address.setStreet("Stokkevej");
-//        address.setAdditionalInfo("Højthus");
-//        CityInfo cityInfo = new CityInfo();
-//        cityInfo.setCity("Tårnby");
-//        cityInfo.setZipCode(2770);
-//        address.setCityInfo(cityInfo);
-//        entity.setAdress(address);
-        
-        facade.addInfoEntity(entity);
-    }
-
-    /**
-     * Test of getPerson method, of class FacadeImp.
-     */
-    @Test
-    public void testGetPerson() {
-        System.out.println("Test getPersons");
-        int id = 1;
-        Person resultPerson = new Person();
-        resultPerson.setFirstName("Mikkel");
-        resultPerson.setLastName("Zimmer");
-        List<Person> persons = facade.getPersons();
-        for (Person person : persons) {
-            assertEquals(resultPerson.getFirstName(), person.getFirstName());
-            assertEquals(resultPerson.getLastName(), person.getLastName());
-        }
-        //Person result = facade.getPerson(id);
-    }
-
-    /**
-     * Test of getPersonByPhone method, of class FacadeImp.
-     */
-//    @Test
-//    public void testGetPersonByPhone() {
-//        System.out.println("getPersonByPhone");
-//        int phoneNumber = 0;
-//        FacadeImp instance = null;
-//        Person expResult = null;
-//        Person result = instance.getPersonByPhone(phoneNumber);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getPersons method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetPersons() {
-//        System.out.println("getPersons");
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersons();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getPersonsByZip method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetPersonsByZip() {
-//        System.out.println("getPersonsByZip");
-//        int zipCode = 0;
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersonsByZip(zipCode);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getPersonsByHobby method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetPersonsByHobby() {
-//        System.out.println("getPersonsByHobby");
-//        Hobby hobby = null;
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersonsByHobby(hobby);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompanies method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCompanies() {
-//        System.out.println("getCompanies");
-//        FacadeImp instance = null;
-//        List<Company> expResult = null;
-//        List<Company> result = instance.getCompanies();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompaniesMinEmployees method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCompaniesMinEmployees() {
-//        System.out.println("getCompaniesMinEmployees");
-//        int minEmployees = 0;
-//        FacadeImp instance = null;
-//        List<Company> expResult = null;
-//        List<Company> result = instance.getCompaniesMinEmployees(minEmployees);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompany method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCompany() {
-//        System.out.println("getCompany");
-//        int cvr = 0;
-//        FacadeImp instance = null;
-//        Company expResult = null;
-//        Company result = instance.getCompany(cvr);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompanyByPhone method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCompanyByPhone() {
-//        System.out.println("getCompanyByPhone");
-//        int phoneNumber = 0;
-//        FacadeImp instance = null;
-//        Company expResult = null;
-//        Company result = instance.getCompanyByPhone(phoneNumber);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCities method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCities() {
-//        System.out.println("getCities");
-//        FacadeImp instance = null;
-//        List<CityInfo> expResult = null;
-//        List<CityInfo> result = instance.getCities();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addInfoEntity method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testAddInfoEntity() {
-//        System.out.println("addInfoEntity");
-//        InfoEntity entity = null;
-//        FacadeImp instance = null;
-//        InfoEntity expResult = null;
-//        InfoEntity result = instance.addInfoEntity(entity);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addHobbyToPerson method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testAddHobbyToPerson() {
-//        System.out.println("addHobbyToPerson");
-//        int personId = 0;
-//        Hobby hobby = null;
-//        FacadeImp instance = null;
-//        Person expResult = null;
-//        Person result = instance.addHobbyToPerson(personId, hobby);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addPhoneToInfoEntity method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testAddPhoneToInfoEntity() {
-//        System.out.println("addPhoneToInfoEntity");
-//        int entityId = 0;
-//        Phone phone = null;
-//        FacadeImp instance = null;
-//        Phone expResult = null;
-//        Phone result = instance.addPhoneToInfoEntity(entityId, phone);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of editPhone method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testEditPhone() {
-//        System.out.println("editPhone");
-//        Phone phone = null;
-//        FacadeImp instance = null;
-//        Phone expResult = null;
-//        Phone result = instance.editPhone(phone);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of editInfoEntity method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testEditInfoEntity() {
-//        System.out.println("editInfoEntity");
-//        InfoEntity entity = null;
-//        FacadeImp instance = null;
-//        InfoEntity expResult = null;
-//        InfoEntity result = instance.editInfoEntity(entity);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteInfoEntity method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testDeleteInfoEntity() {
-//        System.out.println("deleteInfoEntity");
-//        int entityId = 0;
-//        FacadeImp instance = null;
-//        InfoEntity expResult = null;
-//        InfoEntity result = instance.deleteInfoEntity(entityId);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deletePhone method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testDeletePhone() {
-//        System.out.println("deletePhone");
-//        int phoneNumber = 0;
-//        FacadeImp instance = null;
-//        Phone expResult = null;
-//        Phone result = instance.deletePhone(phoneNumber);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
+//    static FacadeImp facade;
+//    public FacadeImpTest() {
 //    }
 //    
+//    @BeforeClass
+//    public static void init(){
+//        facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
+//        Person entity = new Person();
+//        entity.setFirstName("Mikkel");
+//        entity.setLastName("Zimmer");
+//        entity.setEmail("Vettter@Ørvur.Mikkel");
+//        
+////        Hobby hobby = new Hobby();
+////        hobby.setDescription("Hululu");
+////        hobby.setName("Krav Maga");
+////        entity.addHobby(hobby);
+////        
+////        ArrayList<Phone> phones = new ArrayList<Phone>();
+////        Phone phone = new Phone();
+////        phone.setNumber(22334455);
+////        phones.add(phone);
+////        entity.setPhones(phones);
+////        
+////        Address address = new Address();
+////        address.setStreet("Stokkevej");
+////        address.setAdditionalInfo("Højthus");
+////        CityInfo cityInfo = new CityInfo();
+////        cityInfo.setCity("Tårnby");
+////        cityInfo.setZipCode(2770);
+////        address.setCityInfo(cityInfo);
+////        entity.setAdress(address);
+//        
+//        facade.addInfoEntity(entity);
+//    }
+//
+//    /**
+//     * Test of getPerson method, of class FacadeImp.
+//     */
+//    @Test
+//    public void testGetPerson() {
+//        System.out.println("Test getPersons");
+//        int id = 1;
+//        Person resultPerson = new Person();
+//        resultPerson.setFirstName("Mikkel");
+//        resultPerson.setLastName("Zimmer");
+//        List<Person> persons = facade.getPersons();
+//        for (Person person : persons) {
+//            assertEquals(resultPerson.getFirstName(), person.getFirstName());
+//            assertEquals(resultPerson.getLastName(), person.getLastName());
+//        }
+//        //Person result = facade.getPerson(id);
+//    }
+//
+//    /**
+//     * Test of getPersonByPhone method, of class FacadeImp.
+//     */
+////    @Test
+////    public void testGetPersonByPhone() {
+////        System.out.println("getPersonByPhone");
+////        int phoneNumber = 0;
+////        FacadeImp instance = null;
+////        Person expResult = null;
+////        Person result = instance.getPersonByPhone(phoneNumber);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getPersons method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetPersons() {
+////        System.out.println("getPersons");
+////        FacadeImp instance = null;
+////        List<Person> expResult = null;
+////        List<Person> result = instance.getPersons();
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getPersonsByZip method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetPersonsByZip() {
+////        System.out.println("getPersonsByZip");
+////        int zipCode = 0;
+////        FacadeImp instance = null;
+////        List<Person> expResult = null;
+////        List<Person> result = instance.getPersonsByZip(zipCode);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getPersonsByHobby method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetPersonsByHobby() {
+////        System.out.println("getPersonsByHobby");
+////        Hobby hobby = null;
+////        FacadeImp instance = null;
+////        List<Person> expResult = null;
+////        List<Person> result = instance.getPersonsByHobby(hobby);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getCompanies method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetCompanies() {
+////        System.out.println("getCompanies");
+////        FacadeImp instance = null;
+////        List<Company> expResult = null;
+////        List<Company> result = instance.getCompanies();
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getCompaniesMinEmployees method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetCompaniesMinEmployees() {
+////        System.out.println("getCompaniesMinEmployees");
+////        int minEmployees = 0;
+////        FacadeImp instance = null;
+////        List<Company> expResult = null;
+////        List<Company> result = instance.getCompaniesMinEmployees(minEmployees);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getCompany method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetCompany() {
+////        System.out.println("getCompany");
+////        int cvr = 0;
+////        FacadeImp instance = null;
+////        Company expResult = null;
+////        Company result = instance.getCompany(cvr);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getCompanyByPhone method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetCompanyByPhone() {
+////        System.out.println("getCompanyByPhone");
+////        int phoneNumber = 0;
+////        FacadeImp instance = null;
+////        Company expResult = null;
+////        Company result = instance.getCompanyByPhone(phoneNumber);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of getCities method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testGetCities() {
+////        System.out.println("getCities");
+////        FacadeImp instance = null;
+////        List<CityInfo> expResult = null;
+////        List<CityInfo> result = instance.getCities();
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of addInfoEntity method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testAddInfoEntity() {
+////        System.out.println("addInfoEntity");
+////        InfoEntity entity = null;
+////        FacadeImp instance = null;
+////        InfoEntity expResult = null;
+////        InfoEntity result = instance.addInfoEntity(entity);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of addHobbyToPerson method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testAddHobbyToPerson() {
+////        System.out.println("addHobbyToPerson");
+////        int personId = 0;
+////        Hobby hobby = null;
+////        FacadeImp instance = null;
+////        Person expResult = null;
+////        Person result = instance.addHobbyToPerson(personId, hobby);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of addPhoneToInfoEntity method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testAddPhoneToInfoEntity() {
+////        System.out.println("addPhoneToInfoEntity");
+////        int entityId = 0;
+////        Phone phone = null;
+////        FacadeImp instance = null;
+////        Phone expResult = null;
+////        Phone result = instance.addPhoneToInfoEntity(entityId, phone);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of editPhone method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testEditPhone() {
+////        System.out.println("editPhone");
+////        Phone phone = null;
+////        FacadeImp instance = null;
+////        Phone expResult = null;
+////        Phone result = instance.editPhone(phone);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of editInfoEntity method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testEditInfoEntity() {
+////        System.out.println("editInfoEntity");
+////        InfoEntity entity = null;
+////        FacadeImp instance = null;
+////        InfoEntity expResult = null;
+////        InfoEntity result = instance.editInfoEntity(entity);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of deleteInfoEntity method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testDeleteInfoEntity() {
+////        System.out.println("deleteInfoEntity");
+////        int entityId = 0;
+////        FacadeImp instance = null;
+////        InfoEntity expResult = null;
+////        InfoEntity result = instance.deleteInfoEntity(entityId);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////
+////    /**
+////     * Test of deletePhone method, of class FacadeImp.
+////     */
+////    @Test
+////    public void testDeletePhone() {
+////        System.out.println("deletePhone");
+////        int phoneNumber = 0;
+////        FacadeImp instance = null;
+////        Phone expResult = null;
+////        Phone result = instance.deletePhone(phoneNumber);
+////        assertEquals(expResult, result);
+////        fail("The test case is a prototype.");
+////    }
+////    
 }
