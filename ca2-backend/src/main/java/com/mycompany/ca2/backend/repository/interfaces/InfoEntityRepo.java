@@ -21,7 +21,7 @@ public interface InfoEntityRepo {
     InfoEntity addInfoEntity(InfoEntity entity);
 
     
-    Person addHobbyToPerson(int personId, Hobby hobby);
+    Person addHobbyToPerson(Long personId, Hobby hobby);
     /**
      * Edits an InfoEntity - Can be a person or a company
      * @param entity
@@ -34,7 +34,7 @@ public interface InfoEntityRepo {
      * @param id
      * @return 
      */
-    Person getPerson(int id);
+    Person getPerson(Long id);
     
     /**
      * Gets the person with a given phone number
@@ -91,6 +91,6 @@ public interface InfoEntityRepo {
     Company getCompanyByPhone(int phoneNumber);
     
     
-    InfoEntity deleteInfoEntity(int entityId);
+    InfoEntity deleteInfoEntity(Long entityId);
 
 }

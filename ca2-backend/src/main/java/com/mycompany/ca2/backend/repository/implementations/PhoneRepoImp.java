@@ -15,7 +15,7 @@ import com.mycompany.ca2.backend.repository.interfaces.PhoneRepo;
 public class PhoneRepoImp implements PhoneRepo{
 
     @Override
-    public Phone addPhoneToInfoEntity(int entityId, Phone phone) {
+    public Phone addPhoneToInfoEntity(Long entityId, Phone phone) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

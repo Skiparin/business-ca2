@@ -18,7 +18,7 @@ public interface PhoneRepo {
      * @param phone
      * @return 
      */
-    Phone addPhoneToInfoEntity(int entityId, Phone phone);
+    Phone addPhoneToInfoEntity(Long entityId, Phone phone);
     
     /**
      * Edit a phone
