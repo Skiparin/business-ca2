@@ -36,17 +36,15 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     }
 
     @Override
-    public Person addHobbyToPerson(int personId, Hobby hobby) {
+    public Person addHobbyToPerson(Long personId, Hobby hobby) {
         EntityManager em = EmfService.getEmf().createEntityManager();
-        Person newPerson;
         try {
             Person person = em.find(Person.class, personId);
             person.addHobby(hobby);
-            newPerson = em.merge(person);
+            return em.merge(person);
         } finally {
             em.close();
         }
-        return newPerson;
     }
 
     @Override
@@ -55,15 +53,13 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     }
 
     @Override
-    public Person getPerson(int id) {
+    public Person getPerson(Long id) {
         EntityManager em = EmfService.getEmf().createEntityManager();
-        Person person;
         try {
-            person = em.find(Person.class, id);
+            return em.find(Person.class, id);
         } finally {
             em.close();
         }
-        return person;
     }
 
     @Override
@@ -113,7 +109,7 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(int entityId) {
+    public InfoEntity deleteInfoEntity(Long entityId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

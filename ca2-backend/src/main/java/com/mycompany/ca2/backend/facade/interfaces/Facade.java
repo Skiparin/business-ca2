@@ -19,7 +19,7 @@ public interface Facade {
      * @param id
      * @return 
      */
-    Person getPerson(int id);
+    Person getPerson(Long id);
     
     /**
      * Gets the person with a given phone number
@@ -94,7 +94,7 @@ public interface Facade {
      * @param personId
      * @return 
      */
-    Person addHobbyToPerson(int personId, Hobby hobby);
+    Person addHobbyToPerson(Long personId, Hobby hobby);
     
     /**
      * Adds a new Phone object to the InfoEntity with the given Id
@@ -102,7 +102,7 @@ public interface Facade {
      * @param phone
      * @return 
      */
-    Phone addPhoneToInfoEntity(int entityId, Phone phone);
+    Phone addPhoneToInfoEntity(Long entityId, Phone phone);
     
     /**
      * Edit a phone
@@ -119,7 +119,7 @@ public interface Facade {
     InfoEntity editInfoEntity(InfoEntity entity);
     
     
-    InfoEntity deleteInfoEntity(int entityId);
+    InfoEntity deleteInfoEntity(Long entityId);
     
     Phone deletePhone(int phoneNumber);
     

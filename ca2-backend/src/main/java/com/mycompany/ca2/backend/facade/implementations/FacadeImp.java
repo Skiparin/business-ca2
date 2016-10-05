@@ -29,7 +29,7 @@ public class FacadeImp implements Facade{
     }
     
     @Override
-    public Person getPerson(int id) {
+    public Person getPerson(Long id) {
         return this.infoEntityFacade.getPerson(id);
     }
 
@@ -84,12 +84,12 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public Person addHobbyToPerson(int personId, Hobby hobby) {
+    public Person addHobbyToPerson(Long personId, Hobby hobby) {
         return this.infoEntityFacade.addHobbyToPerson(personId, hobby);
     }
 
     @Override
-    public Phone addPhoneToInfoEntity(int entityId, Phone phone) {
+    public Phone addPhoneToInfoEntity(Long entityId, Phone phone) {
         return this.phoneFacade.addPhoneToInfoEntity(entityId, phone);
     }
 
@@ -104,7 +104,7 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(int entityId) {
+    public InfoEntity deleteInfoEntity(Long entityId) {
         return this.infoEntityFacade.deleteInfoEntity(entityId);
     }
 
