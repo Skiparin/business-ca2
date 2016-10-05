@@ -12,6 +12,7 @@ import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -80,12 +81,31 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public List<Person> getPersonsByZip(int zipCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        List<Person> personsWithZipcode = new ArrayList();
+        try {
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p", Person.class);
+            List<Person> persons = personsQuery.getResultList();
+            
+            persons.stream().filter((person) -> (person.getAddress().getCityInfo().getZipCode() == zipCode)).forEach((person) -> {
+                personsWithZipcode.add(person);
+            });
+            return personsWithZipcode;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public List<Person> getPersonsByHobby(Hobby hobby) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.name = :hobbyName", Person.class);
+            personsQuery.setParameter("hobbyName", hobby.getName());
+            return personsQuery.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override

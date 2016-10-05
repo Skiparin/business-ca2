@@ -7,6 +7,7 @@ package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Hobby implements Serializable {
 
-    @ManyToMany(mappedBy = "hobbies")
+    @ManyToMany(mappedBy = "hobbies", cascade={CascadeType.PERSIST})
     private List<Person> persons;
     private static final long serialVersionUID = 1L;
     @Id
