@@ -9,13 +9,16 @@ import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -36,6 +39,7 @@ public class PersonResource {
      */
     @GET
     @Path("/complete")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getAllPersons() {
         Person p = new Person();
         p.setFirstName("Kasper");
@@ -51,7 +55,8 @@ public class PersonResource {
      */
     @GET
     @Path("/complete/{id}")
-    public String getPersonById(@PathParam("id") int id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonById(@PathParam("id") Long id) {
         return JSONConverter.getJSONFromObject(facade.getPerson(id)); // toJson
     }
 
@@ -62,6 +67,7 @@ public class PersonResource {
      */
     @GET
     @Path("/contactinfo")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getInfoPersons() {
         return null; // JSONConverter.getJSONFromObject(facade.getPersonsInfo());
     }
@@ -74,7 +80,8 @@ public class PersonResource {
      */
     @GET
     @Path("/contatinfo/{id}")
-    public String getInfoById(@PathParam("id") int id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoById(@PathParam("id") Long id) {
         return null; // JSONConverter.getJSONFromObject(facade.getPersonInfo(id));
     }
 
@@ -85,6 +92,7 @@ public class PersonResource {
      */
     @GET
     @Path("hobby/{hobby}")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getPersonsByHoppy(@PathParam("hoppy") String hobby){
         return null; //JSONConverter.getJSONFromObject(facade.getPersonsByHobby(hobby));
     }
@@ -96,6 +104,7 @@ public class PersonResource {
      * @param p
      */
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public void createPerson(String person) {
         facade.addInfoEntity((Person) JSONConverter.getObjectFromJson(person, Person.class));
     }
@@ -107,6 +116,7 @@ public class PersonResource {
      * @return
      */
     @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public InfoEntity editPerson(String person) {
         return facade.editInfoEntity((Person)JSONConverter.getObjectFromJson(person, Person.class));
     }
@@ -118,7 +128,8 @@ public class PersonResource {
      */
     @DELETE
     @Path("/{id}")
-    public void deletePersonByID(@PathParam("id") int id) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deletePersonByID(@PathParam("id") Long id) {
         facade.deleteInfoEntity(id);
     }
 
