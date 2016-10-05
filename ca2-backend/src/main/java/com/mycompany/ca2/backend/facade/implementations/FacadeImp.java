@@ -84,7 +84,7 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public Person addHobbyToPerson(int personId, Hobby hobby) {
+    public Person addHobbyToPerson(Long personId, Hobby hobby) {
         return this.infoEntityFacade.addHobbyToPerson(personId, hobby);
     }
 

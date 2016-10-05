@@ -42,7 +42,8 @@ public class FacadeImpTest {
 //        hobby.setDescription("Hululu");
 //        hobby.setName("Krav Maga");
 //        entity.addHobby(hobby);
-//        
+        
+        
 //        ArrayList<Phone> phones = new ArrayList<Phone>();
 //        Phone phone = new Phone();
 //        phone.setNumber(22334455);
@@ -57,7 +58,7 @@ public class FacadeImpTest {
 //        cityInfo.setZipCode(2770);
 //        address.setCityInfo(cityInfo);
 //        entity.setAdress(address);
-        
+//        
         facade.addInfoEntity(entity);
     }
 
@@ -71,10 +72,19 @@ public class FacadeImpTest {
         Person resultPerson = new Person();
         resultPerson.setFirstName("Mikkel");
         resultPerson.setLastName("Zimmer");
+        Hobby personHobby = new Hobby();
+        personHobby.setDescription("Hululu");
+        personHobby.setName("Krav Maga");
         List<Person> persons = facade.getPersons();
         for (Person person : persons) {
             assertEquals(resultPerson.getFirstName(), person.getFirstName());
             assertEquals(resultPerson.getLastName(), person.getLastName());
+            facade.addHobbyToPerson(person.getId(), personHobby);
+            List<Hobby> hobbies = person.getHobbies();
+            for (Hobby hobby : hobbies) {
+                System.out.println(hobby.getName());
+                System.out.println(hobby.getDescription());
+            }
         }
         //Person result = facade.getPerson(id);
     }
