@@ -6,6 +6,7 @@
 package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.Company;
+import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import javax.ws.rs.Consumes;
@@ -44,7 +45,7 @@ public class CompanyResource {
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getCompanyById(@PathParam("id") Long id) {
-        return JSONConverter.getJSONFromObject(facade.getCompany(id));
+        return null; //JSONConverter.getJSONFromObject(facade.getCompany(id));
     }
     
     @GET
@@ -59,6 +60,11 @@ public class CompanyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoCompanies(@PathParam("id") Long id) {
         return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+    }
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.setFirstName("Kasper");
+        System.out.println(JSONConverter.getJSONFromObject(person));
     }
     
     @POST
