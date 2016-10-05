@@ -26,50 +26,108 @@ import org.junit.BeforeClass;
  * @author philliphbrink
  */
 public class FacadeImpTest {
+
     static FacadeImp facade;
+
     public FacadeImpTest() {
     }
-    
+
     @BeforeClass
-    public static void init(){
+    public static void init() {
         facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
-        Person personOne = new Person();
-        personOne.setFirstName("Mikkel");
-        personOne.setLastName("Zimmer");
-        personOne.setEmail("Mikkel@Ørvur.Mikkel");
-        
-        Person personTwo = new Person();
-        personTwo.setFirstName("Kasper");
-        personTwo.setLastName("Vetter");
-        personTwo.setEmail("Vettter@Ørvur.Vetter");
-        
+        Person mikkel = new Person();
+        mikkel.setFirstName("Mikkel");
+        mikkel.setLastName("Ziemmer");
+        mikkel.setEmail("Mikkel@Ørvur.Mikkel");
+
         List<Hobby> personOneHob = new ArrayList();
-        personOne.setHobbies(personOneHob);
-        
+        mikkel.setHobbies(personOneHob);
+
         Hobby hobby = new Hobby();
         hobby.setDescription("Hululu");
         hobby.setName("Krav Maga");
-        personOne.addHobby(hobby);
-        
-        facade.addInfoEntity(personOne);
-        facade.addInfoEntity(personTwo);
-        
-//        ArrayList<Phone> phones = new ArrayList<Phone>();
-//        Phone phone = new Phone();
-//        phone.setNumber(22334455);
-//        phones.add(phone);
-//        entity.setPhones(phones);
+        mikkel.addHobby(hobby);
+
+        ArrayList<Phone> phones = new ArrayList<Phone>();
+        Phone phone = new Phone();
+        phone.setNumber(22334455);
+        phones.add(phone);
+        mikkel.setPhones(phones);
+
+        Address address = new Address();
+        address.setStreet("Stokkevej");
+        address.setAdditionalInfo("Højthus");
+        CityInfo cityTårnby = new CityInfo();
+        cityTårnby.setCity("Tårnby");
+        cityTårnby.setZipCode(2770);
+        address.setCityInfo(cityTårnby);
+        mikkel.setAdress(address);
 //        
-//        Address address = new Address();
-//        address.setStreet("Stokkevej");
-//        address.setAdditionalInfo("Højthus");
-//        CityInfo cityInfo = new CityInfo();
-//        cityInfo.setCity("Tårnby");
-//        cityInfo.setZipCode(2770);
-//        address.setCityInfo(cityInfo);
-//        entity.setAdress(address);
-//        
+        facade.addInfoEntity(mikkel);
         
+        Person vetter = new Person();
+        vetter.setFirstName("Kasper");
+        vetter.setLastName("Vetter");
+        vetter.setEmail("Vettter@Ørvur.Vetter");
+        
+        List<Hobby> personTwoHob = new ArrayList();
+        vetter.setHobbies(personTwoHob);
+
+        Hobby hobbyVetter = new Hobby();
+        hobbyVetter.setDescription("mongol");
+        hobbyVetter.setName("Fodbold");
+        vetter.addHobby(hobbyVetter);
+
+        ArrayList<Phone> phonesVetter = new ArrayList<Phone>();
+        Phone phoneVetter = new Phone();
+        phoneVetter.setNumber(12346432);
+        phonesVetter.add(phone);
+        vetter.setPhones(phonesVetter);
+
+        Address addressVetter = new Address();
+        addressVetter.setStreet("Tiltevej");
+        addressVetter.setAdditionalInfo("Hus");
+        CityInfo cityKøge = new CityInfo();
+        cityKøge.setCity("Køge");
+        cityKøge.setZipCode(3464);
+        addressVetter.setCityInfo(cityKøge);
+        vetter.setAdress(addressVetter);
+        
+        facade.addInfoEntity(vetter);
+        
+        Company companyOne = new Company();
+        companyOne.setCvr("1010");
+        companyOne.setName("Vetters shop");
+        companyOne.setNumEmployees("2");
+        companyOne.setMarketValue("10");
+        companyOne.setDescription("LaufeHause");
+        
+        Address companyOneAddress = new Address();
+        companyOneAddress.setCityInfo(cityKøge);
+        companyOneAddress.setStreet("Vimpevej");
+        companyOneAddress.setAdditionalInfo("Højhus");
+        companyOne.setAdress(companyOneAddress);
+        
+        companyOne.setEmail("Ørvur@Øruver.@Ørvur.dk");
+        
+        facade.addInfoEntity(companyOne);
+        
+        Company companyTwo = new Company();
+        companyTwo.setCvr("5050");
+        companyTwo.setName("Ørvurs legeland");
+        companyTwo.setNumEmployees("100");
+        companyTwo.setMarketValue("100000");
+        companyTwo.setDescription("Legeland");
+        
+        Address companyTwoAddress = new Address();
+        companyTwoAddress.setCityInfo(cityTårnby);
+        companyTwoAddress.setStreet("Øresundsvej");
+        companyTwoAddress.setAdditionalInfo("Palads");
+        companyTwo.setAdress(companyTwoAddress);
+        
+        companyTwo.setEmail("Vetter@Vetter@Vetter.dk");
+        
+        facade.addInfoEntity(companyTwo);
     }
 
     /**
@@ -81,30 +139,38 @@ public class FacadeImpTest {
         Long id = new Long(1);
         Person resultPersonOne = new Person();
         resultPersonOne.setFirstName("Mikkel");
-        resultPersonOne.setLastName("Zimmer");
+        resultPersonOne.setLastName("Ziemmer");
         Person person = facade.getPerson(id);
-        assertEquals(resultPersonOne, person);
+        assertEquals(resultPersonOne.getFirstName(), person.getFirstName());
+        assertEquals(resultPersonOne.getLastName(), person.getLastName());
     }
 
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
-//    @Test
-//    public void testGetPersonByPhone() {
-//        System.out.println("getPersonByPhone");
-//        int phoneNumber = 0;
-//        assertEquals(expResult, result);
-//    }
-//
-//    /**
-//     * Test of getPersons method, of class FacadeImp.
-//     */
+    //Metode er ikke lavet i nu
+    @Test
+    public void testGetPersonByPhone() {
+        System.out.println("getPersonByPhone");
+        int phoneNumber = 22334455;
+        Person person = facade.getPersonByPhone(phoneNumber);
+        assertEquals(person.getFirstName(), "Mikkel");
+        assertEquals(person.getLastName(), "Ziemmer");
+        assertEquals(person.getAddress().getCityInfo().getCity(), "Tårnby");
+        assertEquals(person.getAddress().getCityInfo().getZipCode(), 2770);
+        assertEquals(person.getAddress().getStreet(), "Stokkevej");
+        assertEquals(person.getAddress().getAdditionalInfo(), "Højthus");
+    }
+
+    /**
+     * Test of getPersons method, of class FacadeImp.
+     */
     @Test
     public void testGetPersons() {
         System.out.println("Test getPersons");
         Person resultPersonOne = new Person();
         resultPersonOne.setFirstName("Mikkel");
-        resultPersonOne.setLastName("Zimmer");
+        resultPersonOne.setLastName("Ziemmer");
         Person resultPersonTwo = new Person();
         resultPersonTwo.setFirstName("Kasper");
         resultPersonTwo.setLastName("Vetter");
@@ -114,51 +180,81 @@ public class FacadeImpTest {
         assertEquals(resultPersonTwo.getFirstName(), persons.get(1).getFirstName());
         assertEquals(resultPersonTwo.getLastName(), persons.get(1).getLastName());
     }
-//
-//    /**
-//     * Test of getPersonsByZip method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetPersonsByZip() {
-//        System.out.println("getPersonsByZip");
-//        int zipCode = 0;
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersonsByZip(zipCode);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getPersonsByHobby method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetPersonsByHobby() {
-//        System.out.println("getPersonsByHobby");
-//        Hobby hobby = null;
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersonsByHobby(hobby);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompanies method, of class FacadeImp.
-//     */
-//    @Test
-//    public void testGetCompanies() {
-//        System.out.println("getCompanies");
-//        FacadeImp instance = null;
-//        List<Company> expResult = null;
-//        List<Company> result = instance.getCompanies();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCompaniesMinEmployees method, of class FacadeImp.
-//     */
+
+    /**
+     * Test of getPersonsByZip method, of class FacadeImp.
+     */
+    //Virker ikke før Mikkel har lavet en fejl
+    @Test
+    public void testGetPersonsByZip() {
+        System.out.println("getPersonsByZip");
+        int zipCode = 2770;
+        List<Person> result = facade.getPersonsByZip(zipCode);
+        for (Person person : result) {
+            assertEquals("Mikkel", person.getFirstName());
+            assertEquals("Ziemmer", person.getLastName());
+            assertEquals(person.getAddress().getCityInfo().getCity(), "Tårnby");
+            assertEquals(person.getAddress().getCityInfo().getZipCode(), 2770);
+            assertEquals(person.getAddress().getStreet(), "Stokkevej");
+            assertEquals(person.getAddress().getAdditionalInfo(), "Højthus");
+        }
+    }
+
+    /**
+     * Test of getPersonsByHobby method, of class FacadeImp.
+     */
+    @Test
+    public void testGetPersonsByHobby() {
+        System.out.println("getPersonsByHobby");
+        Hobby hobby = new Hobby();
+        hobby.setName("Fodbold");
+        hobby.setDescription("mongol");
+        List<Person> result = facade.getPersonsByHobby(hobby);
+        System.out.println(result.size());
+        for (Person person : result) {
+            assertEquals(person.getFirstName(), "Kasper");
+            assertEquals(person.getLastName(), "Vetter");
+        }
+    }
+
+    /**
+     * Test of getCompanies method, of class FacadeImp.
+     */
+    @Test
+    public void testGetCompanies() {
+        System.out.println("getCompanies");
+        
+        Company test1 = new Company();
+        test1.setCvr("1010");
+        test1.setName("Vetters shop");
+        test1.setNumEmployees("2");
+        test1.setMarketValue("10");
+        test1.setDescription("LaufeHause");
+        
+        Company test2 = new Company();
+        test2.setCvr("5050");
+        test2.setName("Ørvurs legeland");
+        test2.setNumEmployees("100");
+        test2.setMarketValue("100000");
+        test2.setDescription("Legeland");
+        
+        
+        List<Company> result = facade.getCompanies();
+        assertEquals(result.get(0).getCvr(), test1.getCvr());
+        assertEquals(result.get(0).getName(), test1.getName());
+        assertEquals(result.get(0).getDescription(), test1.getDescription());
+        assertEquals(result.get(0).getMarketValue(), test1.getMarketValue());
+        assertEquals(result.get(0).getNumEmployees(), test1.getNumEmployees());
+        assertEquals(result.get(1).getCvr(), test2.getCvr());
+        assertEquals(result.get(1).getName(), test2.getName());
+        assertEquals(result.get(1).getDescription(), test2.getDescription());
+        assertEquals(result.get(1).getMarketValue(), test2.getMarketValue());
+        assertEquals(result.get(1).getNumEmployees(), test2.getNumEmployees());
+    }
+
+    /**
+     * Test of getCompaniesMinEmployees method, of class FacadeImp.
+     */
 //    @Test
 //    public void testGetCompaniesMinEmployees() {
 //        System.out.println("getCompaniesMinEmployees");
@@ -228,18 +324,21 @@ public class FacadeImpTest {
 //    /**
 //     * Test of addHobbyToPerson method, of class FacadeImp.
 //     */
+
     @Test
     public void testAddHobbyToPerson() {
         System.out.println("addHobbyToPerson");
         Long id = new Long(1);
         Hobby hobby = new Hobby();
-        hobby.setDescription("Kampsport");
-        hobby.setName("Krav Maga");
+        hobby.setDescription("Skoda, Folkevogn, Audi, Seat");
+        hobby.setName("Bil");
         facade.addHobbyToPerson(id, hobby);
         Person person = facade.getPerson(id);
         System.out.println(person.getHobbies().size());
-//        assertEquals(person.getHobbies().get(0).getName(), "Krav Maga");
-//        assertEquals(person.getHobbies().get(0).getDescription(), "Kampsport");
+        System.out.println(person.getHobbies().get(0).getName());
+        assertEquals("Bil", person.getHobbies().get(1).getName());
+        assertEquals("Skoda, Folkevogn, Audi, Seat", person.getHobbies().get(1).getDescription());
+
     }
 //
 //    /**

@@ -16,13 +16,13 @@ import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
  */
 public class Test {
     public static void main(String[] args) {
-        InfoEntityRepo repo = new InfoEntityRepoImp();
-        Hobby hobby = new Hobby();
-        hobby.setName("Karate");
-        for(Person p : repo.getPersonsByHobby(hobby)){
-            System.out.println(p.getFirstName());
-            System.out.println("Hej");
+//        InfoEntityRepo repo = new InfoEntityRepoImp();
+//        Hobby hobby = new Hobby();
+//        hobby.setName("Karate");
+//        for(Person p : repo.getPersonsByHobby(hobby)){
+//            System.out.println(p.getFirstName());
+//            System.out.println("Hej");
         }
         
     }
-}
+

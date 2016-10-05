@@ -87,9 +87,16 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
             TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p", Person.class);
             List<Person> persons = personsQuery.getResultList();
             
-            persons.stream().filter((person) -> (person.getAddress().getCityInfo().getZipCode() == zipCode)).forEach((person) -> {
+            /*persons.stream().filter((person) -> (person.getAddress().getCityInfo().getZipCode() == zipCode)).forEach((person) -> {
                 personsWithZipcode.add(person);
-            });
+            });*/
+            
+            for(Person person : persons){
+                System.out.println(person.getAddress());
+                if(person.getAddress().getCityInfo().getZipCode() == zipCode){
+                    personsWithZipcode.add(person);
+                }
+            }
             return personsWithZipcode;
         } finally {
             em.close();

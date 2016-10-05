@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class InfoEntity implements Serializable {
     private String email;
     
     
-    @ManyToOne(cascade={CascadeType.PERSIST})
+    @ManyToOne(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Address address;
     
     
