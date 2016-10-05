@@ -22,7 +22,7 @@ public class Person extends InfoEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //private Long id;
     private String firstName;
     private String lastName;
     
