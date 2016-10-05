@@ -6,8 +6,12 @@
 package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.Company;
+import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
 import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
+import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,7 +35,7 @@ public class CompanyResource {
     @Context
     private UriInfo context;
     
-    Facade facade;
+        FacadeImp facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
     
     @GET
     @Path("/complete")
@@ -43,7 +47,7 @@ public class CompanyResource {
     @GET
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCompanyById(@PathParam("id") Long id) {
+    public String getCompanyById(@PathParam("id") int id) {
         return JSONConverter.getJSONFromObject(facade.getCompany(id));
     }
     
