@@ -43,7 +43,7 @@ public class CompanyResource {
     @GET
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCompanyById(@PathParam("id") Long id) {
+    public String getCompanyById(@PathParam("id") int id) {
         return JSONConverter.getJSONFromObject(facade.getCompany(id));
     }
     
