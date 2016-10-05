@@ -149,12 +149,12 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(Long entityId) {
+    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         em.getTransaction().begin();
-        Person person = em.find(Person.class, entityId);
-        em.remove(person);
+        InfoEntity entity = (InfoEntity) em.find(type, entityId);
+        em.remove(entity);
         em.getTransaction().commit();
-        return person;
+        return entity;
     }
 }

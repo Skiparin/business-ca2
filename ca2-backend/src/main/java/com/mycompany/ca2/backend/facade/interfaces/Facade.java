@@ -119,7 +119,7 @@ public interface Facade {
     InfoEntity editInfoEntity(InfoEntity entity);
     
     
-    InfoEntity deleteInfoEntity(Long entityId);
+    InfoEntity deleteInfoEntity(Long entityId, Class<?> type);
     
     Phone deletePhone(int phoneNumber);
     

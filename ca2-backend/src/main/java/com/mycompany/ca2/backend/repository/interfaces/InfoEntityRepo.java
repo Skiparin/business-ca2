@@ -91,6 +91,6 @@ public interface InfoEntityRepo {
     Company getCompanyByPhone(int phoneNumber);
     
     
-    InfoEntity deleteInfoEntity(Long entityId);
+    InfoEntity deleteInfoEntity(Long entityId, Class<?> type);
 
 }

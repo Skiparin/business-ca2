@@ -52,24 +52,19 @@ public class CompanyResource {
 
     }
     
-    @GET
-    @Path("/contactinfo")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoCompanies() {
-        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfo());
-    }
+//    @GET
+//    @Path("/contactinfo")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getInfoCompanies() {
+//        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfo());
+//    }
     
-    @GET
-    @Path("/contactinfo/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoCompanies(@PathParam("id") Long id) {
-        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
-    }
-    public static void main(String[] args) {
-        Person person = new Person();
-        person.setFirstName("Kasper");
-        System.out.println(JSONConverter.getJSONFromObject(person));
-    }
+//    @GET
+//    @Path("/contactinfo/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getInfoCompanies(@PathParam("id") Long id) {
+//        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+//    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -78,18 +73,18 @@ public class CompanyResource {
         facade.addInfoEntity(company);
     }
     
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String editCompany(String com){
-        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
-        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String editCompany(String com){
+//        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
+//        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
+//    }
     
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteCompanyById(@PathParam("id") Long id){
-        facade.deleteInfoEntity(id);
+        facade.deleteInfoEntity(id, Company.class);
     }
     
     

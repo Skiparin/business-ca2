@@ -131,7 +131,7 @@ public class PersonResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonByID(@PathParam("id") Long id) {
-        facade.deleteInfoEntity(id);
+        facade.deleteInfoEntity(id, Person.class);
     }
 
 }
