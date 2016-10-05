@@ -129,7 +129,7 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             TypedQuery<Company> companies = em.createQuery("SELECT c FROM Company c WHERE c.cvr = :cvr", Company.class);
-            companies.setParameter("cvr", cvr);
+            companies.setParameter("cvr", String.valueOf(cvr));
             return companies.getSingleResult();
         } finally {
             em.close();

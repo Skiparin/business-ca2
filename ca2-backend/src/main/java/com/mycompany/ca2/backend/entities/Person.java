@@ -63,9 +63,5 @@ public class Person extends InfoEntity {
         this.hobbies.add(hobby);
     }
 
-    @Override
-    public String toString() {
-        return "entity.NewEntity[" + " ]";
-    }
-    
+
 }
