@@ -65,7 +65,14 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public Person getPersonByPhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT phone FROM Phone phone WHERE phone.number = :phoneNumber)", Person.class);
+            personsQuery.setParameter("phoneNumber", phoneNumber);
+            return personsQuery.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override

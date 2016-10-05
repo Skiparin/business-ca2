@@ -17,10 +17,8 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         InfoEntityRepo ie = new InfoEntityRepoImp();
-        List<Person> persons = ie.getPersonsByZip(2000);
+        Person person = ie.getPersonByPhone(123456789);
         
-        for(Person person : persons){
-            System.out.println(person.getFirstName());
-        }
+        System.out.println(person.getFirstName());
     }
 }
