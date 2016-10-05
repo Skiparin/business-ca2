@@ -36,7 +36,7 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     }
 
     @Override
-    public Person addHobbyToPerson(Long personId, Hobby hobby) {
+    public Person addHobbyToPerson(int personId, Hobby hobby) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         Person newPerson;
         try {

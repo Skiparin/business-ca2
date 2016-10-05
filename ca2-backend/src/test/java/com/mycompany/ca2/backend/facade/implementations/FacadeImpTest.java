@@ -33,15 +33,22 @@ public class FacadeImpTest {
     @BeforeClass
     public static void init(){
         facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
-        Person entity = new Person();
-        entity.setFirstName("Mikkel");
-        entity.setLastName("Zimmer");
-        entity.setEmail("Vettter@Ørvur.Mikkel");
+        Person personOne = new Person();
+        personOne.setFirstName("Mikkel");
+        personOne.setLastName("Zimmer");
+        personOne.setEmail("Mikkel@Ørvur.Mikkel");
         
-//        Hobby hobby = new Hobby();
-//        hobby.setDescription("Hululu");
-//        hobby.setName("Krav Maga");
-//        entity.addHobby(hobby);
+        Person personTwo = new Person();
+        personTwo.setFirstName("Kasper");
+        personTwo.setLastName("Vetter");
+        personTwo.setEmail("Vettter@Ørvur.Vetter");
+        
+        List<Hobby> hobbies = new ArrayList();
+        personOne.setHobbies(hobbies);
+        Hobby hobby = new Hobby();
+        hobby.setDescription("Hululu");
+        hobby.setName("Krav Maga");
+        personOne.addHobby(hobby);
         
         
 //        ArrayList<Phone> phones = new ArrayList<Phone>();
@@ -59,7 +66,8 @@ public class FacadeImpTest {
 //        address.setCityInfo(cityInfo);
 //        entity.setAdress(address);
 //        
-        facade.addInfoEntity(entity);
+        facade.addInfoEntity(personOne);
+        facade.addInfoEntity(personTwo);
     }
 
     /**
@@ -67,54 +75,43 @@ public class FacadeImpTest {
      */
     @Test
     public void testGetPerson() {
-        System.out.println("Test getPersons");
-        int id = 1;
-        Person resultPerson = new Person();
-        resultPerson.setFirstName("Mikkel");
-        resultPerson.setLastName("Zimmer");
-        Hobby personHobby = new Hobby();
-        personHobby.setDescription("Hululu");
-        personHobby.setName("Krav Maga");
-        List<Person> persons = facade.getPersons();
-        for (Person person : persons) {
-            assertEquals(resultPerson.getFirstName(), person.getFirstName());
-            assertEquals(resultPerson.getLastName(), person.getLastName());
-            facade.addHobbyToPerson(person.getId(), personHobby);
-            List<Hobby> hobbies = person.getHobbies();
-            for (Hobby hobby : hobbies) {
-                System.out.println(hobby.getName());
-                System.out.println(hobby.getDescription());
-            }
-        }
-        //Person result = facade.getPerson(id);
+        System.out.println("Test getPerson");
+        Long id = new Long(1);
+        Person resultPersonOne = new Person();
+        resultPersonOne.setFirstName("Mikkel");
+        resultPersonOne.setLastName("Zimmer");
+        Person person = facade.getPerson(id);
+        assertEquals(resultPersonOne, person);
     }
 
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
-//    @Test
-//    public void testGetPersonByPhone() {
-//        System.out.println("getPersonByPhone");
-//        int phoneNumber = 0;
-//        FacadeImp instance = null;
-//        Person expResult = null;
-//        Person result = instance.getPersonByPhone(phoneNumber);
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetPersonByPhone() {
+        System.out.println("getPersonByPhone");
+        int phoneNumber = 0;
+        assertEquals(expResult, result);
+    }
 //
 //    /**
 //     * Test of getPersons method, of class FacadeImp.
 //     */
-//    @Test
-//    public void testGetPersons() {
-//        System.out.println("getPersons");
-//        FacadeImp instance = null;
-//        List<Person> expResult = null;
-//        List<Person> result = instance.getPersons();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetPersons() {
+        System.out.println("Test getPersons");
+        Person resultPersonOne = new Person();
+        resultPersonOne.setFirstName("Mikkel");
+        resultPersonOne.setLastName("Zimmer");
+        Person resultPersonTwo = new Person();
+        resultPersonTwo.setFirstName("Kasper");
+        resultPersonTwo.setLastName("Vetter");
+        List<Person> persons = facade.getPersons();
+        assertEquals(resultPersonOne.getFirstName(), persons.get(0).getFirstName());
+        assertEquals(resultPersonOne.getLastName(), persons.get(0).getLastName());
+        assertEquals(resultPersonTwo.getFirstName(), persons.get(1).getFirstName());
+        assertEquals(resultPersonTwo.getLastName(), persons.get(1).getLastName());
+    }
 //
 //    /**
 //     * Test of getPersonsByZip method, of class FacadeImp.
