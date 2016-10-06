@@ -6,6 +6,7 @@
 package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.Company;
+import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
@@ -75,9 +76,8 @@ public class CompanyResource {
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String editCompany(String com){
-        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
-        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
+    public InfoEntity editCompany(String com){
+        return facade.editInfoEntity((Company)JSONConverter.getObjectFromJson(com, Company.class));
     }
     
     @DELETE
