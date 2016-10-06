@@ -65,7 +65,14 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
 
     @Override
     public Person getPersonByPhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT phone FROM Phone phone WHERE phone.number = :phoneNumber)", Person.class);
+            personsQuery.setParameter("phoneNumber", phoneNumber);
+            return personsQuery.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -82,15 +89,10 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     @Override
     public List<Person> getPersonsByZip(int zipCode) {
         EntityManager em = EmfService.getEmf().createEntityManager();
-        List<Person> personsWithZipcode = new ArrayList();
         try {
-            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p", Person.class);
-            List<Person> persons = personsQuery.getResultList();
-            
-            persons.stream().filter((person) -> (person.getAddress().getCityInfo().getZipCode() == zipCode)).forEach((person) -> {
-                personsWithZipcode.add(person);
-            });
-            return personsWithZipcode;
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.address = (SELECT a FROM Address a WHERE a.cityInfo.zipCode = :zip)", Person.class);
+            personsQuery.setParameter("zip", zipCode);
+            return personsQuery.getResultList();
         } finally {
             em.close();
         }
@@ -112,8 +114,8 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     public List<Company> getCompanies() {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
-            TypedQuery<Company> companies = em.createQuery("SELECT c FROM Company c", Company.class);
-            return companies.getResultList();
+            TypedQuery<Company> companyQuery = em.createQuery("SELECT c FROM Company c", Company.class);
+            return companyQuery.getResultList();
         } finally {
             em.close();
         }
@@ -121,7 +123,14 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
 
     @Override
     public List<Company> getCompaniesMinEmployees(int minEmployees) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Company> companyQuery = em.createQuery("SELECT c FROM Company c WHERE c.NumEmployees > :minEmployees", Company.class);
+            companyQuery.setParameter("minEmployees", minEmployees);
+            return companyQuery.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
