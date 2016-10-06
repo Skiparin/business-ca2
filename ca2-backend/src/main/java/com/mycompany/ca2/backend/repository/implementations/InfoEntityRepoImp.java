@@ -10,6 +10,7 @@ import com.mycompany.ca2.backend.entities.Company;
 import com.mycompany.ca2.backend.entities.Hobby;
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
+import com.mycompany.ca2.backend.exceptions.JSONException;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
 import java.util.ArrayList;
@@ -63,33 +64,46 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     }
 
     @Override
-    public Person getPerson(Long id) {
+    public Person getPerson(Long id) throws JSONException {
         EntityManager em = EmfService.getEmf().createEntityManager();
+        Person person;
         try {
-            return em.find(Person.class, id);
+            person = em.find(Person.class, id);
+            if(person == null){
+                throw new JSONException("No known Person associated with specified id");
+            }
         } finally {
             em.close();
         }
+        return person;
     }
 
     @Override
-    public Person getPersonByPhone(int phoneNumber) {
+    public Person getPersonByPhone(int phoneNumber) throws JSONException {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT phone FROM Phone phone WHERE phone.number = :phoneNumber)", Person.class);
             personsQuery.setParameter("phoneNumber", phoneNumber);
-            return personsQuery.getSingleResult();
+            Person person = personsQuery.getSingleResult();
+            if(person == null){
+                throw new JSONException("No known Person associated with specified phonenumber");
+            }
+            return person;
         } finally {
             em.close();
         }
     }
 
     @Override
-    public List<Person> getPersons() {
+    public List<Person> getPersons() throws JSONException{
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             TypedQuery<Person> persons = em.createQuery("SELECT p FROM Person p", Person.class);
-            return persons.getResultList();
+            List<Person> listOfPersons = persons.getResultList();
+            if(listOfPersons.size() == 0){
+                throw new JSONException("No persons located in the database");
+            }
+            return listOfPersons;
         } finally {
             em.close();
         }
@@ -120,11 +134,15 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     }
 
     @Override
-    public List<Company> getCompanies() {
+    public List<Company> getCompanies() throws JSONException{
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             TypedQuery<Company> companyQuery = em.createQuery("SELECT c FROM Company c", Company.class);
-            return companyQuery.getResultList();
+            List<Company> listOfCompanies = companyQuery.getResultList();
+            if(listOfCompanies.size() == 0){
+                throw new JSONException("No persons located in the database");
+            }
+            return listOfCompanies;
         } finally {
             em.close();
         }
@@ -143,12 +161,16 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     }
 
     @Override
-    public Company getCompany(int cvr) {
+    public Company getCompany(int cvr) throws JSONException {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             TypedQuery<Company> companies = em.createQuery("SELECT c FROM Company c WHERE c.cvr = :cvr", Company.class);
             companies.setParameter("cvr", String.valueOf(cvr));
-            return companies.getSingleResult();
+            Company company = companies.getSingleResult();
+            if(company == null){
+                throw new JSONException("No known company associated with specified id");
+            }
+            return company;
         } finally {
             em.close();
         }
@@ -167,10 +189,18 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) {
+    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) throws JSONException {
         EntityManager em = EmfService.getEmf().createEntityManager();
         em.getTransaction().begin();
         InfoEntity entity = (InfoEntity) em.find(type, entityId);
+        
+        if(entity == null && type == Person.class){
+            throw new JSONException("No known person associated with specified id");
+        }
+        if(entity == null && type == Company.class){
+            throw new JSONException("No known company associated with specified id");
+        }
+            
         em.remove(entity);
         em.getTransaction().commit();
         return entity;

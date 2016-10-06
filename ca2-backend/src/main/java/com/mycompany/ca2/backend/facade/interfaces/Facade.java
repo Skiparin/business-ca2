@@ -6,6 +6,7 @@
 package com.mycompany.ca2.backend.facade.interfaces;
 
 import com.mycompany.ca2.backend.entities.*;
+import com.mycompany.ca2.backend.exceptions.JSONException;
 import java.util.List;
 
 /**
@@ -19,20 +20,20 @@ public interface Facade {
      * @param id
      * @return 
      */
-    Person getPerson(Long id);
+    Person getPerson(Long id) throws JSONException;
     
     /**
      * Gets the person with a given phone number
      * @param phoneNumber
      * @return 
      */
-    Person getPersonByPhone(int phoneNumber);
+    Person getPersonByPhone(int phoneNumber) throws JSONException;
     
     /**
      * Gets all person
      * @return 
      */
-    List<Person> getPersons();
+    List<Person> getPersons() throws JSONException;
     
     /**
      * Gets a list of all persons that live within a specific zipcode
@@ -52,7 +53,7 @@ public interface Facade {
      * Gets all companies
      * @return
      */
-    List<Company> getCompanies();
+    List<Company> getCompanies() throws JSONException;
     
     /**
      * Gets all the companies with more employees than the given number
@@ -66,7 +67,7 @@ public interface Facade {
      * @param cvr
      * @return
      */
-    Company getCompany(int cvr);
+    Company getCompany(int cvr) throws JSONException;
     
     /**
      * Gets the company with the given phone number
@@ -119,7 +120,7 @@ public interface Facade {
     InfoEntity editInfoEntity(InfoEntity entity);
     
     
-    InfoEntity deleteInfoEntity(Long entityId, Class<?> type);
+    InfoEntity deleteInfoEntity(Long entityId, Class<?> type) throws JSONException;
     
     Phone deletePhone(int phoneNumber);
     

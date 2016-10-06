@@ -6,6 +6,7 @@
 package com.mycompany.ca2.backend.facade.implementations;
 
 import com.mycompany.ca2.backend.entities.*;
+import com.mycompany.ca2.backend.exceptions.JSONException;
 import com.mycompany.ca2.backend.facade.interfaces.Facade;
 import java.util.List;
 import com.mycompany.ca2.backend.repository.interfaces.AddressRepo;
@@ -29,17 +30,17 @@ public class FacadeImp implements Facade{
     }
     
     @Override
-    public Person getPerson(Long id) {
+    public Person getPerson(Long id)  throws JSONException{
         return this.infoEntityFacade.getPerson(id);
     }
 
     @Override
-    public Person getPersonByPhone(int phoneNumber) {
+    public Person getPersonByPhone(int phoneNumber) throws JSONException{
         return this.infoEntityFacade.getPersonByPhone(phoneNumber);
     }
 
     @Override
-    public List<Person> getPersons() {
+    public List<Person> getPersons() throws JSONException{
         return this.infoEntityFacade.getPersons();
     }
 
@@ -54,7 +55,7 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public List<Company> getCompanies() {
+    public List<Company> getCompanies() throws JSONException{
         return this.infoEntityFacade.getCompanies();
     }
 
@@ -64,7 +65,7 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public Company getCompany(int cvr) {
+    public Company getCompany(int cvr) throws JSONException {
         return this.infoEntityFacade.getCompany(cvr);
     }
 
@@ -104,7 +105,7 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) {
+    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) throws JSONException{
         return this.infoEntityFacade.deleteInfoEntity(entityId, type);
     }
 
