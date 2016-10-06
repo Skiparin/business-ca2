@@ -85,7 +85,7 @@ public class ServiceIntegrationTest {
         body("id", equalTo(3));
     }
 
-//    
+    
 //    @Test
 //    public void getInfoPersons() {
 //        given().
@@ -93,98 +93,98 @@ public class ServiceIntegrationTest {
 //        then().statusCode(200).
 //        body(containsString("22970674"));
 //    }
-//    
-//    @Test
-//    public void getPersonInfoById() {
-//        given().
-//        when().get("/api/person/contactinfo/1").
-//        then().statusCode(200).
-//        body(containsString("Kasper"));
-//    }
-//    
-//    @Test
-//    public void getPersonsByHoppy() {
-//        given().
-//        when().get("/api/person/hobby/fodbold").
-//        then().statusCode(200).
-//        body(containsString("Kasper"));
-//    }
-//    
-//    @Test
-//    public void createPerson() {
-//        given().
-//        when().post("/api/person").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void editPerson() {
-//        given().
-//        when().put("/api/person/hobby/fodbold").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void deletePerson() {
-//        given().
-//        when().delete("/api/person/hobby/fodbold").
-//        then().statusCode(200);
-//    }
-//    
-//    //-------------------------------------------------------------
-//    
-//    @Test
-//    public void getCompanies() {
-//        given().
-//        when().get("/api/company/complete").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void getCompaniesById() {
-//        given().
-//        when().get("/api/company/complete/1").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void getInfoCompanies() {
-//        given().
-//        when().get("/api/company/contactinfo").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void getCompanyInfoById() {
-//        given().
-//        when().get("/api/company/complete/id").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void createCompany() {
-//        given().
-//        when().post("/api/company").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void editCompany() {
-//        given().
-//        when().put("/api/company/").
-//        then().statusCode(200);
-//    }
-//    
-//    @Test
-//    public void deleteCompanyById() {
-//        given().
-//        when().delete("/api/company/id").
-//        then().statusCode(200);
-//    }
-//    
-//    
-//    
-//    
-//    
-//    
+    
+    @Test
+    public void getPersonInfoById() {
+        given().
+        when().get("/api/person/contactinfo/1").
+        then().statusCode(200).
+        body(containsString("Kasper"));
+    }
+    
+    @Test
+    public void getPersonsByHoppy() {
+        given().
+        when().get("/api/person/hobby/fodbold").
+        then().statusCode(200).
+        body(containsString("Kasper"));
+    }
+    
+    @Test
+    public void createPerson() {
+        given().
+        when().post("/api/person").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void editPerson() {
+        given().
+        when().put("/api/person/hobby/fodbold").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void deletePerson() {
+        given().
+        when().delete("/api/person/hobby/fodbold").
+        then().statusCode(200);
+    }
+    
+    //-------------------------------------------------------------
+    
+    @Test
+    public void getCompanies() {
+        given().
+        when().get("/api/company/complete").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void getCompaniesById() {
+        given().
+        when().get("/api/company/complete/1").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void getInfoCompanies() {
+        given().
+        when().get("/api/company/contactinfo").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void getCompanyInfoById() {
+        given().
+        when().get("/api/company/complete/id").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void createCompany() {
+        given().
+        when().post("/api/company").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void editCompany() {
+        given().
+        when().put("/api/company/").
+        then().statusCode(200);
+    }
+    
+    @Test
+    public void deleteCompanyById() {
+        given().
+        when().delete("/api/company/id").
+        then().statusCode(200);
+    }
+    
+    
+    
+    
+    
+    
 }
