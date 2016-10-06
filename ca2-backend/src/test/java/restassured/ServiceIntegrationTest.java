@@ -5,6 +5,9 @@
  */
 package restassured;
 
+import com.mycompany.ca2.backend.entities.Company;
+import com.mycompany.ca2.backend.entities.Person;
+import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -119,12 +122,19 @@ public class ServiceIntegrationTest {
                 then().statusCode(204);
     }
 
-//    @Test
-//    public void editPerson() {
-//        given().
-//                when().put("/api/person/hobby/fodbold").
-//                then().statusCode(200);
-//    }
+    @Test
+    public void editPerson() {
+        Person p = new Person();
+        p.setId(new Long(13));
+        p.setFirstName("Phillip");
+        p.setLastName("Brink");
+        given().
+                contentType(ContentType.JSON).
+                body(p).
+                when().put("/api/person").
+                then().statusCode(200);
+    }
+
     @Test
     public void deletePerson() {
         given().
@@ -170,28 +180,37 @@ public class ServiceIntegrationTest {
 //                then().statusCode(200);
 //    }
 //
+
     @Test
     public void createCompany() {
         Map<String, String> company = new HashMap<>();
         company.put("name", "Tom's Chokolade");
         company.put("description", "Snacks");
-        company.put("cvr","987");
-        company.put("NumEmployees","200");
-        company.put("marketValue","98007");
+        company.put("cvr", "987");
+        company.put("NumEmployees", "200");
+        company.put("marketValue", "98007");
         given()
                 .contentType("application/json")
                 .body(company)
                 .when().post("/api/company").
                 then().statusCode(204);
     }
-//
-//    @Test
-//    public void editCompany() {
-//        given().
-//                when().put("/api/company/").
-//                then().statusCode(200);
-//    }
-//
+
+    @Test
+    public void editCompany() {
+
+        Company c = new Company();
+        c.setId(new Long(23));
+        c.setName("Store");
+        c.setDescription("Stuff");
+        c.setCvr("007");
+        given().
+                contentType(ContentType.JSON).
+                body(c).
+                when().put("/api/company").
+                then().statusCode(200);
+    }
+
     @Test
     public void deleteCompanyById() {
         given().

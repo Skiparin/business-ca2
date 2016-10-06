@@ -73,12 +73,12 @@ public class CompanyResource {
         facade.addInfoEntity(company);
     }
     
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public String editCompany(String com){
-//        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
-//        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
-//    }
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String editCompany(String com){
+        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
+        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
+    }
     
     @DELETE
     @Path("/{id}")
