@@ -27,7 +27,7 @@ public class SchemeBuilder {
         facade.addInfoEntity(person);
 //        person.setId(new Long(2));
 //        person.setFirstName("Mikkel");
-//        facade.editInfoEntity(person);w
+//        facade.editInfoEntity(person);
         Company company = new Company();
         company.setName("Vetter's bitches");
         company.setCvr("12345678");

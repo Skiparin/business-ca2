@@ -11,8 +11,10 @@ import static io.restassured.RestAssured.when;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
+import java.util.HashMap;
 import java.util.List;
-import static org.hamcrest.Matchers.equalTo;
+import java.util.Map;
+import static org.hamcrest.CoreMatchers.equalTo;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -25,10 +27,10 @@ import org.junit.Test;
  * @author kaspe
  */
 public class ServiceIntegrationTest {
-    
+
     public ServiceIntegrationTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
         RestAssured.baseURI = "http://localhost";
@@ -36,15 +38,15 @@ public class ServiceIntegrationTest {
         RestAssured.basePath = "/ca2-backend";
         RestAssured.defaultParser = Parser.JSON;
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -52,40 +54,37 @@ public class ServiceIntegrationTest {
     @Test
     public void serverIsRunning() {
         given().
-        when().
-        get().
-        then().
-        statusCode(200);
-        
+                when().
+                get().
+                then().
+                statusCode(200);
+
     }
-    
+
     @Test
     public void getPersons() {
-        Response response =
-            when().
+        Response response
+                = when().
                 get("/api/person/complete").
-            then().
-                contentType(ContentType.JSON).  // check that the content type return from the API is JSON
-            extract().response(); // extract the response
-        
-        String jsonAsString = response.asString();
-        
+                then().
+                contentType(ContentType.JSON). // check that the content type return from the API is JSON
+                extract().response(); // extract the response
+
         List<Integer> list = response.path("id");
-        
+
         for (int js : list) {
             Assert.assertNotNull(js);
         }
     }
-        
+
     @Test
     public void getPersonById() {
         given().
-        when().get("/api/person/complete/3").
-        then().statusCode(200).
-        body("id", equalTo(3));
+                when().get("/api/person/complete/5").
+                then().statusCode(200).
+                body("id", equalTo(5));
     }
 
-    
 //    @Test
 //    public void getInfoPersons() {
 //        given().
@@ -93,98 +92,110 @@ public class ServiceIntegrationTest {
 //        then().statusCode(200).
 //        body(containsString("22970674"));
 //    }
-    
-    @Test
-    public void getPersonInfoById() {
-        given().
-        when().get("/api/person/contactinfo/1").
-        then().statusCode(200).
-        body(containsString("Kasper"));
-    }
-    
-    @Test
-    public void getPersonsByHoppy() {
-        given().
-        when().get("/api/person/hobby/fodbold").
-        then().statusCode(200).
-        body(containsString("Kasper"));
-    }
-    
+//    @Test
+//    public void getPersonInfoById() {
+//        given().
+//        when().get("/api/person/contactinfo/1").
+//        then().statusCode(200).
+//        body(containsString("Kasper"));
+//    }
+//    
+//    @Test
+//    public void getPersonsByHoppy() {
+//        given().
+//        when().get("/api/person/hobby/fodbold").
+//        then().statusCode(200).
+//        body(containsString("Kasper"));
+//    }
     @Test
     public void createPerson() {
-        given().
-        when().post("/api/person").
-        then().statusCode(200);
+        Map<String, String> person = new HashMap<>();
+        person.put("firstName", "Kasper");
+        person.put("lastName", "Vetter");
+        given()
+                .contentType("application/json")
+                .body(person)
+                .when().post("/api/person").
+                then().statusCode(204);
     }
-    
-    @Test
-    public void editPerson() {
-        given().
-        when().put("/api/person/hobby/fodbold").
-        then().statusCode(200);
-    }
-    
+
+//    @Test
+//    public void editPerson() {
+//        given().
+//                when().put("/api/person/hobby/fodbold").
+//                then().statusCode(200);
+//    }
     @Test
     public void deletePerson() {
         given().
-        when().delete("/api/person/hobby/fodbold").
-        then().statusCode(200);
+                when().delete("/api/person/6").
+                then().statusCode(204);
     }
-    
+
     //-------------------------------------------------------------
-    
     @Test
     public void getCompanies() {
-        given().
-        when().get("/api/company/complete").
-        then().statusCode(200);
+
+        Response response
+                = when().get("/api/company/complete").
+                then().contentType(ContentType.JSON).extract().response();
+
+        List<Integer> list = response.path("id");
+
+        for (int id : list) {
+            Assert.assertNotNull(id);
+        }
     }
-    
+//
+
     @Test
-    public void getCompaniesById() {
+    public void getCompaniesByCvr() {
         given().
-        when().get("/api/company/complete/1").
-        then().statusCode(200);
+                when().get("/api/company/complete/987").
+                then().statusCode(200).
+                body("cvr", equalTo("987"));
     }
-    
-    @Test
-    public void getInfoCompanies() {
-        given().
-        when().get("/api/company/contactinfo").
-        then().statusCode(200);
-    }
-    
-    @Test
-    public void getCompanyInfoById() {
-        given().
-        when().get("/api/company/complete/id").
-        then().statusCode(200);
-    }
-    
+//
+//    @Test
+//    public void getInfoCompanies() {
+//        given().
+//                when().get("/api/company/contactinfo").
+//                then().statusCode(200);
+//    }
+//
+//    @Test
+//    public void getCompanyInfoByCvr() {
+//        given().
+//                when().get("/api/company/complete/id").
+//                then().statusCode(200);
+//    }
+//
     @Test
     public void createCompany() {
-        given().
-        when().post("/api/company").
-        then().statusCode(200);
+        Map<String, String> company = new HashMap<>();
+        company.put("name", "Tom's Chokolade");
+        company.put("description", "Snacks");
+        company.put("cvr","987");
+        company.put("NumEmployees","200");
+        company.put("marketValue","98007");
+        given()
+                .contentType("application/json")
+                .body(company)
+                .when().post("/api/company").
+                then().statusCode(204);
     }
-    
-    @Test
-    public void editCompany() {
-        given().
-        when().put("/api/company/").
-        then().statusCode(200);
-    }
-    
+//
+//    @Test
+//    public void editCompany() {
+//        given().
+//                when().put("/api/company/").
+//                then().statusCode(200);
+//    }
+//
     @Test
     public void deleteCompanyById() {
         given().
-        when().delete("/api/company/id").
-        then().statusCode(200);
+                when().delete("/api/company/7").
+                then().statusCode(204);
     }
-    
-    
-    
-    
-    
-    
 }

@@ -83,7 +83,7 @@ public class PersonResource {
     @Path("/contatinfo/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoById(@PathParam("id") Long id) {
-        return JSONConverter.getJSONFromObject(facade.getPersonInfo(id));
+        return null; // JSONConverter.getJSONFromObject(facade.getPersonInfo(id));
     }
 
     /**
