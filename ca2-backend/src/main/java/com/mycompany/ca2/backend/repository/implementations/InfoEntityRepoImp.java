@@ -50,7 +50,16 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
 
     @Override
     public InfoEntity editInfoEntity(InfoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.find(entity.getClass(), entity.getId());
+            return em.merge(entity);
+        } finally {
+            em.getTransaction().commit();
+            em.close();
+        }
+
     }
 
     @Override
