@@ -5,8 +5,12 @@
  */
 package com.mycompany.ca2.backend.repository.implementations;
 
+import com.mycompany.ca2.backend.EmfService;
+import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Phone;
 import com.mycompany.ca2.backend.repository.interfaces.PhoneRepo;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -16,7 +20,15 @@ public class PhoneRepoImp implements PhoneRepo{
 
     @Override
     public Phone addPhoneToInfoEntity(Long entityId, Phone phone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            InfoEntity ie = em.find(InfoEntity.class, entityId);
+            ie.addPhone(phone);
+            em.merge(ie);
+            return phone;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -26,7 +38,19 @@ public class PhoneRepoImp implements PhoneRepo{
 
     @Override
     public Phone deletePhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Phone> phoneQuery = em.createQuery("SELECT phone FROM Phone phone WHERE number = :phoneNumber", Phone.class);
+            TypedQuery<Phone> deletePhone = em.createQuery("DELETE phone FROM Phone phone WHERE number = :phoneNumber", Phone.class);
+            phoneQuery.setParameter("phoneNumber", phoneNumber);
+            deletePhone.setParameter("phoneNumber", phoneNumber);
+            deletePhone.executeUpdate();
+            em.getTransaction().commit();
+            return phoneQuery.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
     
 }

@@ -81,6 +81,10 @@ public class InfoEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public void addPhone(Phone phone){
+        this.phones.add(phone);
+    }
 
     @Override
     public int hashCode() {
