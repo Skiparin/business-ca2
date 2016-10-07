@@ -94,8 +94,15 @@ public class PersonResource {
     @GET
     @Path("hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersonsByHoppy(@PathParam("hoppy") String hobby){
+    public String getPersonsByHoppy(@PathParam("hobby") String hobby){
         return null; //JSONConverter.getJSONFromObject(facade.getPersonsByHobby(hobby));
+    }
+    
+    @GET
+    @Path("zip/{zipcode}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersonsByZipcode(@PathParam("zipcode") int zip){
+        return JSONConverter.getJSONFromObject(facade.getPersonsByZip(zip));
     }
 
     

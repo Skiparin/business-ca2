@@ -5,9 +5,7 @@
  */
 package restassured;
 
-import com.mycompany.ca2.backend.entities.Company;
-import com.mycompany.ca2.backend.entities.Person;
-import com.mycompany.ca2.backend.jsonparser.JSONConverter;
+import com.mycompany.ca2.backend.entities.Hobby;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -17,6 +15,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -104,12 +103,16 @@ public class ServiceIntegrationTest {
 //    }
 //    
 //    @Test
-//    public void getPersonsByHoppy() {
+//    public void getPersonsByHobby() {
+//        Hobby newhobby = new Hobby();
+//        newhobby.setName("Fodbold");
+//        newhobby.setDescription("En Sport");
 //        given().
 //        when().get("/api/person/hobby/fodbold").
 //        then().statusCode(200).
 //        body(containsString("Kasper"));
 //    }
+    
     @Test
     public void createPerson() {
         Map<String, String> person = new HashMap<>();
@@ -125,7 +128,7 @@ public class ServiceIntegrationTest {
     @Test
     public void editPerson() {
         Map<String, String> person = new HashMap<>();
-        person.put("id", String.valueOf(new Long(13)));
+        person.put("id", String.valueOf(new Long(17)));
         person.put("firstName", "Phillip");
         person.put("lastName", "Brink");
         given().
