@@ -40,10 +40,12 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     public Person addHobbyToPerson(Long personId, Hobby hobby) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
+            em.getTransaction().begin();
             Person person = em.find(Person.class, personId);
             person.addHobby(hobby);
             return em.merge(person);
         } finally {
+            em.getTransaction().commit();
             em.close();
         }
     }
@@ -76,8 +78,9 @@ public class InfoEntityRepoImp implements InfoEntityRepo {
     public Person getPersonByPhone(int phoneNumber) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
-            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT phone FROM Phone phone WHERE phone.number = :phoneNumber)", Person.class);
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT p FROM Phone p WHERE p.number = :phoneNumber)", Person.class);
             personsQuery.setParameter("phoneNumber", phoneNumber);
+            System.out.println("1234 " + personsQuery.getSingleResult() + " 1111");
             return personsQuery.getSingleResult();
         } finally {
             em.close();

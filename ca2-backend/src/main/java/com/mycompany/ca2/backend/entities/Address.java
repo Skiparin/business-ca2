@@ -8,6 +8,7 @@ package com.mycompany.ca2.backend.entities;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Address implements Serializable {
     private String street;
     private String additionalInfo;
     
-    @ManyToOne(cascade={CascadeType.PERSIST})
+    @ManyToOne(cascade={CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private CityInfo cityInfo;
     
 

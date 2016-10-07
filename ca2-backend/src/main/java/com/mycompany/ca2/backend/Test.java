@@ -15,6 +15,12 @@ import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
  */
 public class Test {
     public static void main(String[] args) {
+//        InfoEntityRepo repo = new InfoEntityRepoImp();
+//        Hobby hobby = new Hobby();
+//        hobby.setName("Karate");
+//        for(Person p : repo.getPersonsByHobby(hobby)){
+//            System.out.println(p.getFirstName());
+//            System.out.println("Hej");
         InfoEntityRepoImp pri = new InfoEntityRepoImp();
         Person person = pri.getPerson(new Long(2));
         person.setLastName("Brink");

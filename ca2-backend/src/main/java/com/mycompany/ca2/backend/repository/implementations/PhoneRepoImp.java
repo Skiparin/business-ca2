@@ -22,11 +22,13 @@ public class PhoneRepoImp implements PhoneRepo{
     public Phone addPhoneToInfoEntity(Long entityId, Phone phone) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
+            em.getTransaction().begin();
             InfoEntity ie = em.find(InfoEntity.class, entityId);
             ie.addPhone(phone);
             em.merge(ie);
             return phone;
         } finally {
+            em.getTransaction().commit();
             em.close();
         }
     }
@@ -41,14 +43,14 @@ public class PhoneRepoImp implements PhoneRepo{
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery<Phone> phoneQuery = em.createQuery("SELECT phone FROM Phone phone WHERE number = :phoneNumber", Phone.class);
-            TypedQuery<Phone> deletePhone = em.createQuery("DELETE phone FROM Phone phone WHERE number = :phoneNumber", Phone.class);
+            TypedQuery<Phone> phoneQuery = em.createQuery("SELECT p FROM Phone p WHERE p.number = :phoneNumber", Phone.class);
+            TypedQuery<Phone> deletePhone = em.createQuery("DELETE FROM Phone ph WHERE ph.number = :phoneNumber", Phone.class);
             phoneQuery.setParameter("phoneNumber", phoneNumber);
             deletePhone.setParameter("phoneNumber", phoneNumber);
             deletePhone.executeUpdate();
-            em.getTransaction().commit();
             return phoneQuery.getSingleResult();
         } finally {
+            em.getTransaction().commit();
             em.close();
         }
     }
