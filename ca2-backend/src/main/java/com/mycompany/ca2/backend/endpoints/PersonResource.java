@@ -7,8 +7,11 @@ package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
-import com.mycompany.ca2.backend.facade.interfaces.Facade;
+import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
+import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,7 +34,7 @@ public class PersonResource {
     @Context
     private UriInfo context;
     
-    Facade facade;
+    FacadeImp facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
     /**
      * Gets all persons from database with all data attached
      *
@@ -41,10 +44,8 @@ public class PersonResource {
     @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllPersons() {
-        Person p = new Person();
-        p.setFirstName("Kasper");
-        System.out.println(JSONConverter.getJSONFromObject(p));
-        return  JSONConverter.getJSONFromObject(p);//JSONConverter.getJSONFromObject(facade.getPersons());
+        return  JSONConverter.getJSONFromObject(facade.getPersons());
+
     }
 
     /**
@@ -69,7 +70,7 @@ public class PersonResource {
     @Path("/contactinfo")
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoPersons() {
-        return null; // JSONConverter.getJSONFromObject(facade.getPersonsInfo());
+        return null; //JSONConverter.getJSONFromObject(facade.getPersonsInfo());
     }
 
     /**
@@ -130,7 +131,7 @@ public class PersonResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePersonByID(@PathParam("id") Long id) {
-        facade.deleteInfoEntity(id);
+        facade.deleteInfoEntity(id, Person.class);
     }
 
 }

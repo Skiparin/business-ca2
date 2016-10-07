@@ -6,8 +6,12 @@
 package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.Company;
-import com.mycompany.ca2.backend.facade.interfaces.Facade;
+import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
+import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
+import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
+import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,7 +35,7 @@ public class CompanyResource {
     @Context
     private UriInfo context;
     
-    Facade facade;
+        FacadeImp facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
     
     @GET
     @Path("/complete")
@@ -43,23 +47,24 @@ public class CompanyResource {
     @GET
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCompanyById(@PathParam("id") Long id) {
+    public String getCompanyById(@PathParam("id") int id) {
         return JSONConverter.getJSONFromObject(facade.getCompany(id));
+
     }
     
-    @GET
-    @Path("/contactinfo")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoCompanies() {
-        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfo());
-    }
+//    @GET
+//    @Path("/contactinfo")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getInfoCompanies() {
+//        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfo());
+//    }
     
-    @GET
-    @Path("/contactinfo/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoCompanies(@PathParam("id") Long id) {
-        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
-    }
+//    @GET
+//    @Path("/contactinfo/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getInfoCompanies(@PathParam("id") Long id) {
+//        return null; //JSONConverter.getJSONFromObject(facade.getCompanyInfoById(id));
+//    }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -68,18 +73,18 @@ public class CompanyResource {
         facade.addInfoEntity(company);
     }
     
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String editCompany(String com){
-        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
-        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String editCompany(String com){
+//        Company company = (Company) JSONConverter.getObjectFromJson(com, Company.class);
+//        return JSONConverter.getJSONFromObject(facade.editInfoEntity(company));
+//    }
     
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteCompanyById(@PathParam("id") Long id){
-        facade.deleteInfoEntity(id);
+        facade.deleteInfoEntity(id, Company.class);
     }
     
     

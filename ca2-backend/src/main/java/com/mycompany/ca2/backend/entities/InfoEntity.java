@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -38,7 +40,7 @@ public class InfoEntity implements Serializable {
     private Address address;
     
     
-    @OneToMany(mappedBy = "infoEntity", cascade={CascadeType.PERSIST})
+    @OneToMany(mappedBy = "InfoEntity", cascade={CascadeType.PERSIST})
     private List<Phone> phones;
 
     public void setAdress(Address address){
@@ -79,6 +81,10 @@ public class InfoEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public void addPhone(Phone phone){
+        this.phones.add(phone);
     }
 
     @Override

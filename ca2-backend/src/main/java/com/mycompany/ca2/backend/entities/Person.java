@@ -23,7 +23,6 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Person extends InfoEntity {
     private static final long serialVersionUID = 1L;
-
     private String firstName;
     private String lastName;
     
@@ -58,10 +57,11 @@ public class Person extends InfoEntity {
     public void setHobbies(List<Hobby> Hobbies) {
         this.hobbies = Hobbies;
     }
-    
+   
     
     public void addHobby(Hobby hobby){
         this.hobbies.add(hobby);
     }
-    
+
+
 }

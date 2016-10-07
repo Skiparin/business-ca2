@@ -5,10 +5,9 @@
  */
 package com.mycompany.ca2.backend;
 
-import com.mycompany.ca2.backend.entities.Hobby;
+import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
-import com.mycompany.ca2.backend.repository.interfaces.InfoEntityRepo;
 
 /**
  *
@@ -22,7 +21,12 @@ public class Test {
 //        for(Person p : repo.getPersonsByHobby(hobby)){
 //            System.out.println(p.getFirstName());
 //            System.out.println("Hej");
-        }
-        
-    }
+        InfoEntityRepoImp pri = new InfoEntityRepoImp();
+        Person person = pri.getPerson(new Long(2));
+        person.setLastName("Brink");
 
+        pri.editInfoEntity(person);
+    }
+    
+    
+}

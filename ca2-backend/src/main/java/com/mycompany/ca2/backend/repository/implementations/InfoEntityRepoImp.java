@@ -20,12 +20,12 @@ import javax.persistence.TypedQuery;
  *
  * @author Mikkel
  */
-public class InfoEntityRepoImp implements InfoEntityRepo{
+public class InfoEntityRepoImp implements InfoEntityRepo {
 
     @Override
     public InfoEntity addInfoEntity(InfoEntity entity) {
         EntityManager em = EmfService.getEmf().createEntityManager();
-        
+
         try {
             em.getTransaction().begin();
             em.persist(entity);
@@ -40,17 +40,28 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     public Person addHobbyToPerson(Long personId, Hobby hobby) {
         EntityManager em = EmfService.getEmf().createEntityManager();
         try {
+            em.getTransaction().begin();
             Person person = em.find(Person.class, personId);
             person.addHobby(hobby);
             return em.merge(person);
         } finally {
+            em.getTransaction().commit();
             em.close();
         }
     }
 
     @Override
     public InfoEntity editInfoEntity(InfoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.find(entity.getClass(), entity.getId());
+            return em.merge(entity);
+        } finally {
+            em.getTransaction().commit();
+            em.close();
+        }
+
     }
 
     @Override
@@ -65,7 +76,15 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public Person getPersonByPhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.phones = (SELECT p FROM Phone p WHERE p.number = :phoneNumber)", Person.class);
+            personsQuery.setParameter("phoneNumber", phoneNumber);
+            System.out.println("1234 " + personsQuery.getSingleResult() + " 1111");
+            return personsQuery.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -82,22 +101,10 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
     @Override
     public List<Person> getPersonsByZip(int zipCode) {
         EntityManager em = EmfService.getEmf().createEntityManager();
-        List<Person> personsWithZipcode = new ArrayList();
         try {
-            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p", Person.class);
-            List<Person> persons = personsQuery.getResultList();
-            
-            /*persons.stream().filter((person) -> (person.getAddress().getCityInfo().getZipCode() == zipCode)).forEach((person) -> {
-                personsWithZipcode.add(person);
-            });*/
-            
-            for(Person person : persons){
-                System.out.println(person.getAddress());
-                if(person.getAddress().getCityInfo().getZipCode() == zipCode){
-                    personsWithZipcode.add(person);
-                }
-            }
-            return personsWithZipcode;
+            TypedQuery<Person> personsQuery = em.createQuery("SELECT p FROM Person p WHERE p.address = (SELECT a FROM Address a WHERE a.cityInfo.zipCode = :zip)", Person.class);
+            personsQuery.setParameter("zip", zipCode);
+            return personsQuery.getResultList();
         } finally {
             em.close();
         }
@@ -117,26 +124,58 @@ public class InfoEntityRepoImp implements InfoEntityRepo{
 
     @Override
     public List<Company> getCompanies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Company> companyQuery = em.createQuery("SELECT c FROM Company c", Company.class);
+            return companyQuery.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public List<Company> getCompaniesMinEmployees(int minEmployees) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Company> companyQuery = em.createQuery("SELECT c FROM Company c WHERE c.NumEmployees > :minEmployees", Company.class);
+            companyQuery.setParameter("minEmployees", minEmployees);
+            return companyQuery.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public Company getCompany(int cvr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Company> companies = em.createQuery("SELECT c FROM Company c WHERE c.cvr = :cvr", Company.class);
+            companies.setParameter("cvr", String.valueOf(cvr));
+            return companies.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public Company getCompanyByPhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        try {
+            TypedQuery<Company> companies = em.createQuery("SELECT c FROM Company c WHERE c.phones = (SELECT p FROM Phone p WHERE p.number = :phone)", Company.class);
+            companies.setParameter("phone", phoneNumber);
+            return companies.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(Long entityId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) {
+        EntityManager em = EmfService.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        InfoEntity entity = (InfoEntity) em.find(type, entityId);
+        em.remove(entity);
+        em.getTransaction().commit();
+        return entity;
     }
 }

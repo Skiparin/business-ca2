@@ -104,8 +104,8 @@ public class FacadeImp implements Facade{
     }
 
     @Override
-    public InfoEntity deleteInfoEntity(Long entityId) {
-        return this.infoEntityFacade.deleteInfoEntity(entityId);
+    public InfoEntity deleteInfoEntity(Long entityId, Class<?> type) {
+        return this.infoEntityFacade.deleteInfoEntity(entityId, type);
     }
 
     @Override

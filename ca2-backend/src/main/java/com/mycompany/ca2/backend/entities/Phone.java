@@ -6,6 +6,7 @@
 package com.mycompany.ca2.backend.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Phone implements Serializable {
     private int number;
     private String description;
     
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.PERSIST})
     private InfoEntity infoEntity;
 
     public Long getId() {

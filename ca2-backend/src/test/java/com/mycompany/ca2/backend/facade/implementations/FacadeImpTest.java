@@ -17,6 +17,7 @@ import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -49,10 +50,11 @@ public class FacadeImpTest {
         mikkel.addHobby(hobby);
 
         ArrayList<Phone> phones = new ArrayList<Phone>();
+        mikkel.setPhones(phones);
         Phone phone = new Phone();
         phone.setNumber(22334455);
-        phones.add(phone);
-        mikkel.setPhones(phones);
+        mikkel.addPhone(phone);
+        
 
         Address address = new Address();
         address.setStreet("Stokkevej");
@@ -64,25 +66,24 @@ public class FacadeImpTest {
         mikkel.setAdress(address);
 //        
         facade.addInfoEntity(mikkel);
-        
+
         Person vetter = new Person();
         vetter.setFirstName("Kasper");
         vetter.setLastName("Vetter");
         vetter.setEmail("Vettter@Ørvur.Vetter");
-        
+
         List<Hobby> personTwoHob = new ArrayList();
         vetter.setHobbies(personTwoHob);
-
         Hobby hobbyVetter = new Hobby();
         hobbyVetter.setDescription("mongol");
         hobbyVetter.setName("Fodbold");
         vetter.addHobby(hobbyVetter);
 
         ArrayList<Phone> phonesVetter = new ArrayList<Phone>();
+        vetter.setPhones(phonesVetter);
         Phone phoneVetter = new Phone();
         phoneVetter.setNumber(12346432);
-        phonesVetter.add(phone);
-        vetter.setPhones(phonesVetter);
+        vetter.addPhone(phoneVetter);
 
         Address addressVetter = new Address();
         addressVetter.setStreet("Tiltevej");
@@ -92,42 +93,68 @@ public class FacadeImpTest {
         cityKøge.setZipCode(3464);
         addressVetter.setCityInfo(cityKøge);
         vetter.setAdress(addressVetter);
-        
+
         facade.addInfoEntity(vetter);
-        
+
         Company companyOne = new Company();
         companyOne.setCvr("1010");
         companyOne.setName("Vetters shop");
         companyOne.setNumEmployees("2");
         companyOne.setMarketValue("10");
         companyOne.setDescription("LaufeHause");
-        
+
         Address companyOneAddress = new Address();
         companyOneAddress.setCityInfo(cityKøge);
         companyOneAddress.setStreet("Vimpevej");
         companyOneAddress.setAdditionalInfo("Højhus");
         companyOne.setAdress(companyOneAddress);
-        
+
         companyOne.setEmail("Ørvur@Øruver.@Ørvur.dk");
-        
+
         facade.addInfoEntity(companyOne);
-        
+
         Company companyTwo = new Company();
         companyTwo.setCvr("5050");
         companyTwo.setName("Ørvurs legeland");
         companyTwo.setNumEmployees("100");
         companyTwo.setMarketValue("100000");
         companyTwo.setDescription("Legeland");
-        
+
         Address companyTwoAddress = new Address();
         companyTwoAddress.setCityInfo(cityTårnby);
         companyTwoAddress.setStreet("Øresundsvej");
         companyTwoAddress.setAdditionalInfo("Palads");
         companyTwo.setAdress(companyTwoAddress);
-        
+
         companyTwo.setEmail("Vetter@Vetter@Vetter.dk");
-        
+
         facade.addInfoEntity(companyTwo);
+    }
+
+    @AfterClass
+    public static void after() {
+//        List<Person> persons = facade.getPersons();
+//        for (Person person : persons) {
+//            if (person.getFirstName().equals("Mikkel") && person.getLastName().equals("Ziemmer")) {
+//                facade.deleteInfoEntity(person.getId(), Person.class);
+//            } else if (person.getFirstName().equals("Kasper") && person.getLastName().equals("Vetter")) {
+//                facade.deleteInfoEntity(person.getId(), Person.class);
+//            }
+//        }
+//        
+//        List<Company> companies = facade.getCompanies();
+//        for (Company company : companies) {
+//            if (company.getCvr().equals("1010")) {
+//                facade.deleteInfoEntity(company.getId(), Company.class);
+//            } else if (company.getCvr().equals("5050")) {
+//                facade.deleteInfoEntity(company.getId(), Company.class);
+//            }
+//
+//        }
+        
+        
+//        facade.deletePhone(12346432);
+//        facade.deletePhone(22334455);
     }
 
     /**
@@ -148,12 +175,12 @@ public class FacadeImpTest {
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
-    //Metode er ikke lavet i nu
     @Test
     public void testGetPersonByPhone() {
         System.out.println("getPersonByPhone");
         int phoneNumber = 22334455;
         Person person = facade.getPersonByPhone(phoneNumber);
+        System.out.println("Dette er person " + person);
         assertEquals(person.getFirstName(), "Mikkel");
         assertEquals(person.getLastName(), "Ziemmer");
         assertEquals(person.getAddress().getCityInfo().getCity(), "Tårnby");
@@ -184,7 +211,6 @@ public class FacadeImpTest {
     /**
      * Test of getPersonsByZip method, of class FacadeImp.
      */
-    //Virker ikke før Mikkel har lavet en fejl
     @Test
     public void testGetPersonsByZip() {
         System.out.println("getPersonsByZip");
@@ -210,7 +236,6 @@ public class FacadeImpTest {
         hobby.setName("Fodbold");
         hobby.setDescription("mongol");
         List<Person> result = facade.getPersonsByHobby(hobby);
-        System.out.println(result.size());
         for (Person person : result) {
             assertEquals(person.getFirstName(), "Kasper");
             assertEquals(person.getLastName(), "Vetter");
@@ -223,22 +248,21 @@ public class FacadeImpTest {
     @Test
     public void testGetCompanies() {
         System.out.println("getCompanies");
-        
+
         Company test1 = new Company();
         test1.setCvr("1010");
         test1.setName("Vetters shop");
         test1.setNumEmployees("2");
         test1.setMarketValue("10");
         test1.setDescription("LaufeHause");
-        
+
         Company test2 = new Company();
         test2.setCvr("5050");
         test2.setName("Ørvurs legeland");
         test2.setNumEmployees("100");
         test2.setMarketValue("100000");
         test2.setDescription("Legeland");
-        
-        
+
         List<Company> result = facade.getCompanies();
         assertEquals(result.get(0).getCvr(), test1.getCvr());
         assertEquals(result.get(0).getName(), test1.getName());
@@ -324,15 +348,14 @@ public class FacadeImpTest {
 //    /**
 //     * Test of addHobbyToPerson method, of class FacadeImp.
 //     */
-
     @Test
     public void testAddHobbyToPerson() {
         System.out.println("addHobbyToPerson");
         Long id = new Long(1);
-        Hobby hobby = new Hobby();
-        hobby.setDescription("Skoda, Folkevogn, Audi, Seat");
-        hobby.setName("Bil");
-        facade.addHobbyToPerson(id, hobby);
+        Hobby newhobby = new Hobby();
+        newhobby.setDescription("Skoda, Folkevogn, Audi, Seat");
+        newhobby.setName("Bil");
+        facade.addHobbyToPerson(id, newhobby);
         Person person = facade.getPerson(id);
         System.out.println(person.getHobbies().size());
         System.out.println(person.getHobbies().get(0).getName());
@@ -412,4 +435,5 @@ public class FacadeImpTest {
 //        fail("The test case is a prototype.");
 //    }
 //    
+
 }
