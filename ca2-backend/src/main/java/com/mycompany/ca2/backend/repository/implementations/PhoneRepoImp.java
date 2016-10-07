@@ -48,7 +48,8 @@ public class PhoneRepoImp implements PhoneRepo{
             phoneQuery.setParameter("phoneNumber", phoneNumber);
             deletePhone.setParameter("phoneNumber", phoneNumber);
             deletePhone.executeUpdate();
-            return phoneQuery.getSingleResult();
+            //return phoneQuery.getSingleResult();
+            return new Phone();
         } finally {
             em.getTransaction().commit();
             em.close();

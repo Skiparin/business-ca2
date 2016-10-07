@@ -14,7 +14,8 @@ import javax.persistence.Persistence;
  */
 public class EmfService {
     private static EntityManagerFactory emf;
-
+    
+    
     public static EntityManagerFactory getEmf(){
         if(emf == null){
             emf = Persistence.createEntityManagerFactory("com.mycompany.ca2.backend_api_war_0.0.1-SNAPSHOTPU");
