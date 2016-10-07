@@ -12,6 +12,7 @@ import com.mycompany.ca2.backend.entities.Hobby;
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.entities.Phone;
+import com.mycompany.ca2.backend.exceptions.JSONException;
 import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
@@ -88,10 +89,10 @@ public class FacadeImpTest {
         Address addressVetter = new Address();
         addressVetter.setStreet("Tiltevej");
         addressVetter.setAdditionalInfo("Hus");
-        CityInfo cityKøge = new CityInfo();
-        cityKøge.setCity("Køge");
-        cityKøge.setZipCode(3464);
-        addressVetter.setCityInfo(cityKøge);
+        CityInfo cityKoge = new CityInfo();
+        cityKoge.setCity("Køge");
+        cityKoge.setZipCode(3464);
+        addressVetter.setCityInfo(cityKoge);
         vetter.setAdress(addressVetter);
 
         facade.addInfoEntity(vetter);
@@ -104,7 +105,7 @@ public class FacadeImpTest {
         companyOne.setDescription("LaufeHause");
 
         Address companyOneAddress = new Address();
-        companyOneAddress.setCityInfo(cityKøge);
+        companyOneAddress.setCityInfo(cityKoge);
         companyOneAddress.setStreet("Vimpevej");
         companyOneAddress.setAdditionalInfo("Højhus");
         companyOne.setAdress(companyOneAddress);
@@ -161,7 +162,7 @@ public class FacadeImpTest {
      * Test of getPerson method, of class FacadeImp.
      */
     @Test
-    public void testGetPerson() {
+    public void testGetPerson() throws JSONException {
         System.out.println("Test getPerson");
         Long id = new Long(1);
         Person resultPersonOne = new Person();
@@ -176,7 +177,7 @@ public class FacadeImpTest {
      * Test of getPersonByPhone method, of class FacadeImp.
      */
     @Test
-    public void testGetPersonByPhone() {
+    public void testGetPersonByPhone() throws JSONException {
         System.out.println("getPersonByPhone");
         int phoneNumber = 22334455;
         Person person = facade.getPersonByPhone(phoneNumber);
@@ -193,7 +194,7 @@ public class FacadeImpTest {
      * Test of getPersons method, of class FacadeImp.
      */
     @Test
-    public void testGetPersons() {
+    public void testGetPersons() throws JSONException {
         System.out.println("Test getPersons");
         Person resultPersonOne = new Person();
         resultPersonOne.setFirstName("Mikkel");
@@ -246,7 +247,7 @@ public class FacadeImpTest {
      * Test of getCompanies method, of class FacadeImp.
      */
     @Test
-    public void testGetCompanies() {
+    public void testGetCompanies() throws JSONException {
         System.out.println("getCompanies");
 
         Company test1 = new Company();
@@ -349,7 +350,7 @@ public class FacadeImpTest {
 //     * Test of addHobbyToPerson method, of class FacadeImp.
 //     */
     @Test
-    public void testAddHobbyToPerson() {
+    public void testAddHobbyToPerson() throws JSONException {
         System.out.println("addHobbyToPerson");
         Long id = new Long(1);
         Hobby newhobby = new Hobby();

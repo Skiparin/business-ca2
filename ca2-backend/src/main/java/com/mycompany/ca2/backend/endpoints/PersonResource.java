@@ -7,11 +7,14 @@ package com.mycompany.ca2.backend.endpoints;
 
 import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
+import com.mycompany.ca2.backend.exceptions.JSONException;
 import com.mycompany.ca2.backend.facade.implementations.FacadeImp;
 import com.mycompany.ca2.backend.jsonparser.JSONConverter;
 import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.InfoEntityRepoImp;
 import com.mycompany.ca2.backend.repository.implementations.PhoneRepoImp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -44,8 +47,11 @@ public class PersonResource {
     @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllPersons() {
-        return  JSONConverter.getJSONFromObject(facade.getPersons());
-
+        try {
+            return  JSONConverter.getJSONFromObject(facade.getPersons());
+        } catch (JSONException ex) {
+            return JSONConverter.getJSONFromObject(ex);
+        }
     }
 
     /**
@@ -58,7 +64,11 @@ public class PersonResource {
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersonById(@PathParam("id") Long id) {
-        return JSONConverter.getJSONFromObject(facade.getPerson(id)); // toJson
+        try {
+            return JSONConverter.getJSONFromObject(facade.getPerson(id)); // toJson
+        } catch (JSONException ex) {
+            return JSONConverter.getJSONFromObject(ex);
+        }
     }
 
     /**
@@ -137,8 +147,13 @@ public class PersonResource {
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deletePersonByID(@PathParam("id") Long id) {
-        facade.deleteInfoEntity(id, Person.class);
+    public String deletePersonByID(@PathParam("id") Long id) {
+        try {
+            InfoEntity entity = facade.deleteInfoEntity(id, Person.class);
+            return JSONConverter.getJSONFromObject(entity);
+        } catch (JSONException ex) {
+            return JSONConverter.getJSONFromObject(ex);
+        }
     }
 
 }
