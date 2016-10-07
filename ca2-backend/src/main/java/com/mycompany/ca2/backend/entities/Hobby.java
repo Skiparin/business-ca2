@@ -22,7 +22,7 @@ import javax.persistence.ManyToMany;
 public class Hobby implements Serializable {
 
     @ManyToMany(mappedBy = "hobbies", cascade={CascadeType.PERSIST})
-    private List<Person> persons;
+    transient private List<Person> persons;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

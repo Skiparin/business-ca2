@@ -176,6 +176,7 @@ public class FacadeImpTest {
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
+    /*
     @Test
     public void testGetPersonByPhone() throws JSONException {
         System.out.println("getPersonByPhone");
@@ -189,7 +190,7 @@ public class FacadeImpTest {
         assertEquals(person.getAddress().getStreet(), "Stokkevej");
         assertEquals(person.getAddress().getAdditionalInfo(), "Højthus");
     }
-
+*/
     /**
      * Test of getPersons method, of class FacadeImp.
      */

@@ -28,7 +28,7 @@ public class CityInfo implements Serializable {
     private int zipCode;
     private String city;
     @OneToMany(mappedBy = "cityInfo")
-    private List<Address> addresses;
+    transient private List<Address> addresses;
 
     public Long getId() {
         return id;
