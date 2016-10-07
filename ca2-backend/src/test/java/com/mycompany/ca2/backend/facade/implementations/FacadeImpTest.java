@@ -98,7 +98,7 @@ public class FacadeImpTest {
         addressVetter.setAdditionalInfo("Hus");
         CityInfo cityKoge = new CityInfo();
         cityKoge.setCity("Køge");
-        cityKoge.setZipCode(3464);
+        cityKoge.setZipCode(4600);
         addressVetter.setCityInfo(cityKoge);
         vetter.setAdress(addressVetter);
 
@@ -137,15 +137,53 @@ public class FacadeImpTest {
         companyTwo.setEmail("Vetter@Vetter@Vetter.dk");
 
         facade.addInfoEntity(companyTwo);
+        
+        
+        Person phillip = new Person();
+        phillip.setFirstName("Phillip");
+        phillip.setLastName("Brink");
+        phillip.setEmail("Brink@Ørvur.Mikkel");
+
+        List<Hobby> personOneHob1 = new ArrayList();
+        phillip.setHobbies(personOneHob1);
+
+        Hobby hobby1 = new Hobby();
+        hobby1.setDescription("Hululu");
+        hobby1.setName("Krav Maga");
+        phillip.addHobby(hobby1);
+
+        ArrayList<Phone> phones1 = new ArrayList<Phone>();
+        Phone phone2 = new Phone();
+        phone2.setDescription("Arbejde");
+        phone2.setNumber(234343434);
+        phone2.setInfoEntity(phillip);
+        Phone phone3 = new Phone();
+        phone3.setDescription("Hjem");
+        phone3.setNumber(232324453);
+        phone3.setInfoEntity(phillip);
+        phillip.setPhones(phones1);
+        phillip.addPhone(phone2);
+        phillip.addPhone(phone3);
+
+        Address addressTest = new Address();
+        addressTest.setStreet("Stokkevej");
+        addressTest.setAdditionalInfo("Højthus");
+        CityInfo cityKoge2 = new CityInfo();
+        cityKoge2.setCity("Næstved");
+        cityKoge2.setZipCode(4700);
+        addressTest.setCityInfo(cityKoge2);
+        phillip.setAdress(addressTest);
+//        
+        facade.addInfoEntity(phillip);
     }
 
     @AfterClass
     public static void after() throws JSONException{
-        facade.deleteInfoEntity(new Long(1), Person.class);
+        /*facade.deleteInfoEntity(new Long(1), Person.class);
         facade.deleteInfoEntity(new Long(2), Person.class);
 
         facade.deleteInfoEntity(new Long(3), Company.class);
-        facade.deleteInfoEntity(new Long(4), Company.class);
+        facade.deleteInfoEntity(new Long(4), Company.class);*/
 
     }
 
@@ -167,13 +205,9 @@ public class FacadeImpTest {
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
-    /*
+
     @Test
-<<<<<<< HEAD
     public void testGetPersonByPhone() throws JSONException {
-=======
-        public void testGetPersonByPhone() {
->>>>>>> ae9084c0456cf0fc89e2b3d38c66188f34472592
         System.out.println("getPersonByPhone");
         int phoneNumber = 22334455;
         Person person = facade.getPersonByPhone(phoneNumber);
@@ -185,7 +219,7 @@ public class FacadeImpTest {
         assertEquals(person.getAddress().getStreet(), "Stokkevej");
         assertEquals(person.getAddress().getAdditionalInfo(), "Højthus");
     }
-*/
+
     /**
      * Test of getPersons method, of class FacadeImp.
      */
