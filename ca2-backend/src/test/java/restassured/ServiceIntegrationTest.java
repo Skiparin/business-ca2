@@ -142,7 +142,7 @@ public class ServiceIntegrationTest {
     public void deletePerson() {
         given().
                 when().delete("/api/person/6").
-                then().statusCode(500);
+                then().statusCode(200);
     }
 
     //-------------------------------------------------------------
@@ -164,7 +164,7 @@ public class ServiceIntegrationTest {
     @Test
     public void getCompanyByCvr() {
         given().
-                when().get("/api/company/complete/987").
+                when().get("/api/company/complete/007").
                 then().statusCode(200).
                 body("cvr", equalTo("007"));
     }
@@ -218,6 +218,6 @@ public class ServiceIntegrationTest {
     public void deleteCompanyById() {
         given().
                 when().delete("/api/company/7").
-                then().statusCode(500);
+                then().statusCode(200);
     }
 }
