@@ -117,4 +117,31 @@
             </plugin>
         </plugins>
     </build>
+    <!-- Til test databasen -->
+    <profiles>
+        <profile>
+            <id>set_datasource</id>
+            <build>
+                <!-- enable resource filter to set the datasource name -->
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>CA2-Test</id>
+            <properties>
+                <database.name>CA2-Test</database.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>CA2-DB</id>
+            <properties>
+                <database.name>com.mycompany.ca2.backend_api_war_0.0.1-SNAPSHOTPU</database.name>
+            </properties>
+        </profile>
+    </profiles>
 </project>

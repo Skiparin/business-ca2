@@ -21,11 +21,11 @@ public class Test {
 //        for(Person p : repo.getPersonsByHobby(hobby)){
 //            System.out.println(p.getFirstName());
 //            System.out.println("Hej");
-        InfoEntityRepoImp pri = new InfoEntityRepoImp();
-        Person person = pri.getPerson(new Long(2));
-        person.setLastName("Brink");
-
-        pri.editInfoEntity(person);
+//        InfoEntityRepoImp pri = new InfoEntityRepoImp();
+//        Person person = pri.getPerson(new Long(2));
+//        person.setLastName("Brink");
+//
+//        pri.editInfoEntity(person);
     }
     
     

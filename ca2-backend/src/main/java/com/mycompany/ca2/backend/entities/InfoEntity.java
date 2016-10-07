@@ -40,7 +40,7 @@ public class InfoEntity implements Serializable {
     private Address address;
     
     
-    @OneToMany(mappedBy = "InfoEntity", cascade={CascadeType.PERSIST})
+    @OneToMany(mappedBy = "infoEntity", cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Phone> phones;
 
     public void setAdress(Address address){

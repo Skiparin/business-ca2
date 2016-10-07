@@ -9,7 +9,6 @@ import com.mycompany.ca2.backend.entities.Address;
 import com.mycompany.ca2.backend.entities.CityInfo;
 import com.mycompany.ca2.backend.entities.Company;
 import com.mycompany.ca2.backend.entities.Hobby;
-import com.mycompany.ca2.backend.entities.InfoEntity;
 import com.mycompany.ca2.backend.entities.Person;
 import com.mycompany.ca2.backend.entities.Phone;
 import com.mycompany.ca2.backend.repository.implementations.AddressRepoImp;
@@ -36,6 +35,7 @@ public class FacadeImpTest {
     @BeforeClass
     public static void init() {
         facade = new FacadeImp(new InfoEntityRepoImp(), new PhoneRepoImp(), new AddressRepoImp());
+
         Person mikkel = new Person();
         mikkel.setFirstName("Mikkel");
         mikkel.setLastName("Ziemmer");
@@ -50,11 +50,17 @@ public class FacadeImpTest {
         mikkel.addHobby(hobby);
 
         ArrayList<Phone> phones = new ArrayList<Phone>();
-        mikkel.setPhones(phones);
         Phone phone = new Phone();
+        phone.setDescription("Arbejde");
         phone.setNumber(22334455);
+        phone.setInfoEntity(mikkel);
+        Phone phone1 = new Phone();
+        phone1.setDescription("Hjem");
+        phone1.setNumber(232324453);
+        phone1.setInfoEntity(mikkel);
+        mikkel.setPhones(phones);
+        mikkel.addPhone(phone1);
         mikkel.addPhone(phone);
-        
 
         Address address = new Address();
         address.setStreet("Stokkevej");
@@ -83,6 +89,7 @@ public class FacadeImpTest {
         vetter.setPhones(phonesVetter);
         Phone phoneVetter = new Phone();
         phoneVetter.setNumber(12346432);
+        phoneVetter.setInfoEntity(vetter);
         vetter.addPhone(phoneVetter);
 
         Address addressVetter = new Address();
@@ -133,35 +140,19 @@ public class FacadeImpTest {
 
     @AfterClass
     public static void after() {
-//        List<Person> persons = facade.getPersons();
-//        for (Person person : persons) {
-//            if (person.getFirstName().equals("Mikkel") && person.getLastName().equals("Ziemmer")) {
-//                facade.deleteInfoEntity(person.getId(), Person.class);
-//            } else if (person.getFirstName().equals("Kasper") && person.getLastName().equals("Vetter")) {
-//                facade.deleteInfoEntity(person.getId(), Person.class);
-//            }
-//        }
-//        
-//        List<Company> companies = facade.getCompanies();
-//        for (Company company : companies) {
-//            if (company.getCvr().equals("1010")) {
-//                facade.deleteInfoEntity(company.getId(), Company.class);
-//            } else if (company.getCvr().equals("5050")) {
-//                facade.deleteInfoEntity(company.getId(), Company.class);
-//            }
-//
-//        }
-        
-        
-//        facade.deletePhone(12346432);
-//        facade.deletePhone(22334455);
+        facade.deleteInfoEntity(new Long(1), Person.class);
+        facade.deleteInfoEntity(new Long(2), Person.class);
+
+        facade.deleteInfoEntity(new Long(3), Company.class);
+        facade.deleteInfoEntity(new Long(4), Company.class);
+
     }
 
-    /**
-     * Test of getPerson method, of class FacadeImp.
-     */
-    @Test
-    public void testGetPerson() {
+/**
+ * Test of getPerson method, of class FacadeImp.
+ */
+@Test
+        public void testGetPerson() {
         System.out.println("Test getPerson");
         Long id = new Long(1);
         Person resultPersonOne = new Person();
@@ -176,7 +167,7 @@ public class FacadeImpTest {
      * Test of getPersonByPhone method, of class FacadeImp.
      */
     @Test
-    public void testGetPersonByPhone() {
+        public void testGetPersonByPhone() {
         System.out.println("getPersonByPhone");
         int phoneNumber = 22334455;
         Person person = facade.getPersonByPhone(phoneNumber);
@@ -193,7 +184,7 @@ public class FacadeImpTest {
      * Test of getPersons method, of class FacadeImp.
      */
     @Test
-    public void testGetPersons() {
+        public void testGetPersons() {
         System.out.println("Test getPersons");
         Person resultPersonOne = new Person();
         resultPersonOne.setFirstName("Mikkel");
@@ -212,7 +203,7 @@ public class FacadeImpTest {
      * Test of getPersonsByZip method, of class FacadeImp.
      */
     @Test
-    public void testGetPersonsByZip() {
+        public void testGetPersonsByZip() {
         System.out.println("getPersonsByZip");
         int zipCode = 2770;
         List<Person> result = facade.getPersonsByZip(zipCode);
@@ -230,7 +221,7 @@ public class FacadeImpTest {
      * Test of getPersonsByHobby method, of class FacadeImp.
      */
     @Test
-    public void testGetPersonsByHobby() {
+        public void testGetPersonsByHobby() {
         System.out.println("getPersonsByHobby");
         Hobby hobby = new Hobby();
         hobby.setName("Fodbold");
@@ -246,7 +237,7 @@ public class FacadeImpTest {
      * Test of getCompanies method, of class FacadeImp.
      */
     @Test
-    public void testGetCompanies() {
+        public void testGetCompanies() {
         System.out.println("getCompanies");
 
         Company test1 = new Company();
@@ -349,7 +340,7 @@ public class FacadeImpTest {
 //     * Test of addHobbyToPerson method, of class FacadeImp.
 //     */
     @Test
-    public void testAddHobbyToPerson() {
+        public void testAddHobbyToPerson() {
         System.out.println("addHobbyToPerson");
         Long id = new Long(1);
         Hobby newhobby = new Hobby();
