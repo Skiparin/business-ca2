@@ -54,11 +54,11 @@ public class FacadeImpTest {
         Phone phone = new Phone();
         phone.setDescription("Arbejde");
         phone.setNumber(22334455);
-        phone.setInfoEntity(mikkel);
+        //phone.setInfoEntity(mikkel);
         Phone phone1 = new Phone();
         phone1.setDescription("Hjem");
         phone1.setNumber(232324453);
-        phone1.setInfoEntity(mikkel);
+        //phone1.setInfoEntity(mikkel);
         mikkel.setPhones(phones);
         mikkel.addPhone(phone1);
         mikkel.addPhone(phone);
@@ -90,7 +90,7 @@ public class FacadeImpTest {
         vetter.setPhones(phonesVetter);
         Phone phoneVetter = new Phone();
         phoneVetter.setNumber(12346432);
-        phoneVetter.setInfoEntity(vetter);
+        //phoneVetter.setInfoEntity(vetter);
         vetter.addPhone(phoneVetter);
 
         Address addressVetter = new Address();
@@ -156,11 +156,11 @@ public class FacadeImpTest {
         Phone phone2 = new Phone();
         phone2.setDescription("Arbejde");
         phone2.setNumber(234343434);
-        phone2.setInfoEntity(phillip);
+        //phone2.setInfoEntity(phillip);
         Phone phone3 = new Phone();
         phone3.setDescription("Hjem");
         phone3.setNumber(232324453);
-        phone3.setInfoEntity(phillip);
+        //phone3.setInfoEntity(phillip);
         phillip.setPhones(phones1);
         phillip.addPhone(phone2);
         phillip.addPhone(phone3);
@@ -205,7 +205,7 @@ public class FacadeImpTest {
     /**
      * Test of getPersonByPhone method, of class FacadeImp.
      */
-
+/*
     @Test
     public void testGetPersonByPhone() throws JSONException {
         System.out.println("getPersonByPhone");
@@ -219,7 +219,7 @@ public class FacadeImpTest {
         assertEquals(person.getAddress().getStreet(), "Stokkevej");
         assertEquals(person.getAddress().getAdditionalInfo(), "Højthus");
     }
-
+*/
     /**
      * Test of getPersons method, of class FacadeImp.
      */

@@ -43,11 +43,11 @@ public class NewClass {
         Phone phone = new Phone();
         phone.setDescription("Arbejde");
         phone.setNumber(22334455);
-        phone.setInfoEntity(mikkel);
+        //phone.setInfoEntity(mikkel);
         Phone phone1 = new Phone();
         phone1.setDescription("Hjem");
         phone1.setNumber(232324453);
-        phone1.setInfoEntity(mikkel);
+        //phone1.setInfoEntity(mikkel);
         mikkel.setPhones(phones);
         mikkel.addPhone(phone1);
         mikkel.addPhone(phone);
@@ -81,11 +81,11 @@ public class NewClass {
         Phone phone2 = new Phone();
         phone2.setDescription("Arbejde");
         phone2.setNumber(234343434);
-        phone2.setInfoEntity(phillip);
+        //phone2.setInfoEntity(phillip);
         Phone phone3 = new Phone();
         phone3.setDescription("Hjem");
         phone3.setNumber(232324453);
-        phone3.setInfoEntity(phillip);
+        //phone3.setInfoEntity(phillip);
         phillip.setPhones(phones1);
         phillip.addPhone(phone2);
         phillip.addPhone(phone3);

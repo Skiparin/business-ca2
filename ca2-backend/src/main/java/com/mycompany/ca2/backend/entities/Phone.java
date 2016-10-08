@@ -27,8 +27,8 @@ public class Phone implements Serializable {
     private int number;
     private String description;
     
-    @ManyToOne
-    private InfoEntity infoEntity;
+//    @ManyToOne
+//    private InfoEntity infoEntity;
 
     public Long getId() {
         return id;
@@ -54,13 +54,13 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    public InfoEntity getInfoEntity() {
-        return infoEntity;
-    }
-
-    public void setInfoEntity(InfoEntity infoEntity) {
-        this.infoEntity = infoEntity;
-    }
+//    public InfoEntity getInfoEntity() {
+//        return infoEntity;
+//    }
+//
+//    public void setInfoEntity(InfoEntity infoEntity) {
+//        this.infoEntity = infoEntity;
+//    }
 
     @Override
     public int hashCode() {

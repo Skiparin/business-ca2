@@ -25,6 +25,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -46,12 +47,8 @@ public class PersonResource {
     @GET
     @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPersons() {
-        try {
-            return  JSONConverter.getJSONFromObject(facade.getPersons());
-        } catch (JSONException ex) {
-            return JSONConverter.getJSONFromObject(ex);
-        }
+    public Response getAllPersons() throws JSONException {
+        return Response.ok(facade.getPersons()).build();
     }
 
     /**
