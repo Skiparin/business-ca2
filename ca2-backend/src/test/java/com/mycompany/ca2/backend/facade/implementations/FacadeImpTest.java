@@ -228,7 +228,7 @@ public class FacadeImpTest {
         System.out.println("Test getPersons");
         Person resultPersonOne = new Person();
         resultPersonOne.setFirstName("Mikkel");
-        resultPersonOne.setLastName("Ziemmer");
+        resultPersonOne.setLastName("Ziemer");
         Person resultPersonTwo = new Person();
         resultPersonTwo.setFirstName("Kasper");
         resultPersonTwo.setLastName("Vetter");

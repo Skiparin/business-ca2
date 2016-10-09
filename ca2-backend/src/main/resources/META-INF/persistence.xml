@@ -10,7 +10,7 @@
     <class>com.mycompany.ca2.backend.entities.Phone</class>
     <class>com.mycompany.ca2.backend.entities.InfoEntity</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://37.139.12.91:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="crazy1234"/>
