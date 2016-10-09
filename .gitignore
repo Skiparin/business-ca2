@@ -1,2 +1,2 @@
 /ca2-backend/target/
-/ca2-backend/source/main/resources/META-INF/*
+/ca2-backend/src/main/resources/META-INF/*
